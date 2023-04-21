@@ -53,14 +53,23 @@ class YouthPolicyAPISetting {
   }
 }
 
+class APIServerSetting {
+  readonly authURL: string;
+  constructor() {
+    if (!process.env.AUTH_SERVER_URL) throw new Error('AUTH_SERVER_URL is not defined');
+    this.authURL = process.env.AUTH_SERVER_URL;
+  }
+}
 class Setting {
   readonly was: WASSetting;
   readonly db: DBSetting;
   readonly youthPolicyAPI: YouthPolicyAPISetting;
+  readonly authServer: APIServerSetting;
   constructor() {
     this.was = new WASSetting();
     this.db = new DBSetting();
     this.youthPolicyAPI = new YouthPolicyAPISetting();
+    this.authServer = new APIServerSetting();
   }
 }
 
