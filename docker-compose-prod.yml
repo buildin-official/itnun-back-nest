@@ -1,0 +1,44 @@
+
+
+version: "3.7"
+
+networks:
+  main_net:
+    name: main_main_net
+    external: true
+  back_net:
+    driver: bridge
+
+services:
+  itnun-back:
+    build: ./
+    container_name: itnun-back
+    image: itnun-back
+    expose:
+      - ${WAS_PORT}
+    volumes:
+      - ./itnun-log:/log
+    env_file: .env
+    environment:
+      TZ: Asia/Seoul
+    restart: always
+    depends_on:
+      - mariadb
+    networks:
+      - main_net
+      - back_net
+  mariadb:
+    container_name: itnun-mariadb
+    image: mariadb:10.11.2
+    expose:
+      - ${MYSQL_PORT}
+    volumes:
+      - ./mariadb/conf.d:/etc/mysql/conf.d
+      - ./mariadb/data:/var/lib/mysql
+      - ./mariadb/initdb.d:/docker-entrypoint-initdb.d
+    env_file: .env
+    environment:
+      TZ: Asia/Seoul
+    restart: always
+    networks:
+      - back_net
