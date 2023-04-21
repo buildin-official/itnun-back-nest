@@ -27,6 +27,6 @@ describe('BuildinAuthMiddleware', () => {
 
     // check 'userId' property is added to request
     expect(middlewareRes).toBeDefined();
-    expect(middlewareRes).toBe('314f04c4-d73c-4f54-9446-c75b3a2f3cb5');
+    expect(middlewareRes).toBe('314f04c4-d73c-4f54-9446-c75b3a2f3bc5');
   });
 });

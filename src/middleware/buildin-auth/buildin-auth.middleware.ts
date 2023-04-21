@@ -15,10 +15,9 @@ export class BuildinAuthMiddleware implements NestMiddleware {
       const userIdResponse = await axios.get<{
         code: number;
         message: string;
-        userId: string;
+        'user-id': string;
       }>(`${BUILDIN_AUTH_ROOT}/info`);
-      console.log(userIdResponse);
-      req.userId = userIdResponse.data.userId;
+      req.userId = userIdResponse.data['user-id'];
       next();
       return req.userId;
     } catch (err) {

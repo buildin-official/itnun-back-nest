@@ -11,5 +11,12 @@ services:
       - ./mariadb/data:/var/lib/mysql
       - ./mariadb/initdb.d:/docker-entrypoint-initdb.d
     environment:
-      TZ: Asia/Seoul
+      - TZ
+      - MYSQL_HOST
+      - MYSQL_DATABASE
+      - MYSQL_HOSTNAME
+      - MYSQL_PASSWORD
+      - MYSQL_PORT
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_USER
     restart: always
