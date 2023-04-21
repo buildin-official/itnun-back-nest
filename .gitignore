@@ -48,3 +48,4 @@ mariadb/
 itnun-log/
 
 .env
+.env_test

@@ -1,3 +1,12 @@
+function convertStringToBoolean(str: string): boolean {
+  if (str === '0') {
+    return false;
+  } else if (str === '1') {
+    return true;
+  } else {
+    throw new Error('Input string must be either "0" or "1"');
+  }
+}
 class WASSetting {
   readonly port: number;
   readonly authServerURL: string;
@@ -10,21 +19,26 @@ class WASSetting {
 }
 
 class DBSetting {
-  readonly host: string = 'itnun-mariadb';
+  readonly host: string;
   readonly port: number;
   readonly database: string;
   readonly user: string;
   readonly password: string;
+  readonly tablesync: boolean;
   // get these env variables and if not exist, raise error
   constructor() {
+    if (!process.env.MYSQL_HOSTNAME) throw new Error('MYSQL_HOSTNAME is not defined');
     if (!process.env.MYSQL_PORT) throw new Error('MYSQL_PORT is not defined');
     if (!process.env.MYSQL_DATABASE) throw new Error('MYSQL_DATABASE is not defined');
     if (!process.env.MYSQL_USER) throw new Error('MYSQL_USER is not defined');
     if (!process.env.MYSQL_PASSWORD) throw new Error('MYSQL_PASSWORD is not defined');
+    if (!process.env.MYSQL_TABLE_SYNC) throw new Error('TABLE_SYNC is not defined');
+    this.host = process.env.MYSQL_HOSTNAME;
     this.port = Number(process.env.MYSQL_PORT);
     this.database = process.env.MYSQL_DATABASE;
     this.user = process.env.MYSQL_USER;
     this.password = process.env.MYSQL_PASSWORD;
+    this.tablesync = convertStringToBoolean(process.env.MYSQL_TABLE_SYNC);
   }
 }
 
