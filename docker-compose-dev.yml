@@ -28,7 +28,7 @@ services:
       - main_net
       - back_net
   mariadb:
-    container_name: itnun-mariadb
+    container_name: ${MYSQL_HOSTNAME}
     image: mariadb:10.11.2
     ports:
       - ${MYSQL_PORT}:${MYSQL_PORT}
