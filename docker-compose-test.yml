@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  mariadb:
+    container_name: itnun-mariadb
+    image: mariadb:10.11.2
+    ports:
+      - ${MYSQL_PORT}:${MYSQL_PORT}
+    volumes:
+      - ./mariadb/conf.d:/etc/mysql/conf.d
+      - ./mariadb/data:/var/lib/mysql
+      - ./mariadb/initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      - TZ
+      - MYSQL_HOST
+      - MYSQL_DATABASE
+      - MYSQL_HOSTNAME
+      - MYSQL_PASSWORD
+      - MYSQL_PORT
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_USER
+    restart: always
