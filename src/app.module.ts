@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { setting } from './setting';
 import { UserDetailModule } from './userDetail/userDetail.module';
+import { YouthPolicyModule } from './youthPolicy/youthPolicy.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { UserDetailModule } from './userDetail/userDetail.module';
       synchronize: true,
     }),
     UserDetailModule,
+    YouthPolicyModule,
   ],
   controllers: [AppController],
   providers: [AppService],
