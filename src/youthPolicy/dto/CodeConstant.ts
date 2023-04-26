@@ -28,7 +28,7 @@ export const policyTypeCodeList = [
   '004006006',
 ];
 
-export const policyLocalCodeList = [
+export const policyLocationCodeList = [
   '003001',
   '003002001',
   '003002001001',
