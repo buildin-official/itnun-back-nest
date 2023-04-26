@@ -34,8 +34,8 @@ export class YouthPolicyAPIService {
 
     for await (const policy of policyList) {
       result.push({
-        policyId: $(policy).find('bizID').text(),
-        policyBizLocation: $(policy).find('polyBizSced').text(),
+        policyId: $(policy).find('bizId').text(),
+        policyBizLocation: $(policy).find('polyBizSecd').text(),
         policyBizType: $(policy).find('polyBizTy').text(),
         policyName: $(policy).find('polyBizSjnm').text(),
         policyIntroduce: $(policy).find('polyItcnCn').text(),
