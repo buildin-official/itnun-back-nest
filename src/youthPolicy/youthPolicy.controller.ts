@@ -1,6 +1,7 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { instanceToPlain } from 'class-transformer';
 
+import { PolicyDetailSearchDto } from './dto/PolicyDetailSearchDto';
 import { YouthPolicyService } from './youthPolicy.service';
 
 @Controller('youthpolicy')
@@ -16,9 +17,11 @@ export class YouthPolicyController {
       return 'Search Keyword is Null!';
     }
     const result = await this.youthPolicy.generalSearch(searchKeyword, pageIndex);
-    if (result == null) {
-      return 'UserDetail Not Found!';
-    }
+    return Object.assign(instanceToPlain(result));
+  }
+  @Post('/search')
+  async policyDetailSearch(@Body() detailSearchData: PolicyDetailSearchDto): Promise<string> {
+    const result = await this.youthPolicy.detailSearch(detailSearchData);
     return Object.assign(instanceToPlain(result));
   }
 }

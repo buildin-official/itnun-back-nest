@@ -48,5 +48,5 @@ export class PolicyDetailSearchDto {
   policyTypeCode: string[];
   @IsOptional()
   @Validate(PolicyLocalCodeChecker)
-  policyLocalCode: string[];
+  policyLocationCode: string[];
 }
