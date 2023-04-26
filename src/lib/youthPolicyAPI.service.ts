@@ -6,6 +6,8 @@ import { stringify } from 'qs';
 import { setting } from '../setting';
 import { PolicyResultDto } from '../youthPolicy/dto/PolicyResultDto';
 
+// API Docs URL: https://www.youthcenter.go.kr/opi/openApiIntro.do
+
 @Injectable()
 export class YouthPolicyAPIService {
   async queryAPI(params: {
