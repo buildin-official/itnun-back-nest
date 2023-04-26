@@ -1,3 +1,4 @@
+// 정책 유형 코드
 export const policyTypeCodeList = [
   '004001',
   '004001001',
@@ -28,6 +29,7 @@ export const policyTypeCodeList = [
   '004006006',
 ];
 
+// 정책 주관 지역(기관) 코드
 export const policyLocationCodeList = [
   '003001',
   '003002001',
