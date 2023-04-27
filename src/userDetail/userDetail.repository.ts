@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
 
-import { UserDetail } from '../entities/userDetail.entity';
+import { UserDetail } from '@/entities/userDetail.entity';
 
 export const userDetailRepository = [
   {

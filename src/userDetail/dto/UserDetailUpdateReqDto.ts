@@ -1,45 +1,9 @@
-import {
-  IsNumber,
-  IsOptional,
-  Matches,
-  Max,
-  Min,
-  Validate,
-  ValidatorConstraint,
-  ValidatorConstraintInterface,
-} from 'class-validator';
+import { IsIn, IsNumber, IsOptional, Matches, Max, Min } from 'class-validator';
+
+import { AllIsInArray } from '@/lib/decorator/AllIsInArray';
 
 import { localCodeList, majorCodeList, computerSkillCodeList, preferentialCodeList } from './CodeConstant';
 
-@ValidatorConstraint({ name: 'Local Code Checker', async: false })
-export class LocalCodeChecker implements ValidatorConstraintInterface {
-  validate(text: string) {
-    return localCodeList.includes(Number(text));
-  }
-
-  defaultMessage() {
-    // here you can provide default error message if validation failed
-    return 'Local Code is not valid';
-  }
-}
-@ValidatorConstraint({ name: 'Major Code Checker', async: false })
-export class MajorCodeChecker implements ValidatorConstraintInterface {
-  validate(text: string) {
-    return majorCodeList.includes(text);
-  }
-}
-@ValidatorConstraint({ name: 'Computer Skill Checker', async: false })
-export class ComputerSkillChecker implements ValidatorConstraintInterface {
-  validate(value: number[]) {
-    return value.every((v) => computerSkillCodeList.includes(v));
-  }
-}
-@ValidatorConstraint({ name: 'Preferential Check', async: false })
-export class PreferentialChecker implements ValidatorConstraintInterface {
-  validate(value: string[]) {
-    return value.every((v) => preferentialCodeList.includes(v));
-  }
-}
 export class UserDetailUpdateReqDto {
   // birthDate YYYYMMDD
   // localCode 5 dight code
@@ -55,7 +19,7 @@ export class UserDetailUpdateReqDto {
   birthDate: string;
   @IsOptional()
   @IsNumber()
-  @Validate(LocalCodeChecker)
+  @IsIn(localCodeList)
   localCode: number;
   @IsOptional()
   @IsNumber()
@@ -73,12 +37,12 @@ export class UserDetailUpdateReqDto {
   @Max(7)
   education: number;
   @IsOptional()
-  @Validate(MajorCodeChecker)
+  @AllIsInArray(majorCodeList)
   major: string;
   @IsOptional()
-  @Validate(ComputerSkillChecker)
+  @AllIsInArray(computerSkillCodeList)
   computerSkill: number[];
   @IsOptional()
-  @Validate(PreferentialChecker)
+  @AllIsInArray(preferentialCodeList)
   preferential: string[];
 }
