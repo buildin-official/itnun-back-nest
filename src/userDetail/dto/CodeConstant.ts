@@ -16,6 +16,7 @@ export const localCodeList = [
   48123, 48125, 48127, 48129, 48170, 48220, 48240, 48250, 48270, 48310, 48330, 48720, 48730, 48740, 48820, 48840, 48850,
   48860, 48870, 48880, 48890, 50110, 50130,
 ];
+
 export const majorCodeList = [];
 
 export const computerSkillCodeList = [1, 2, 4, 6, 9];

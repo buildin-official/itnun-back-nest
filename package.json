@@ -76,7 +76,11 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/../src/$1",
+      "^@decorator/(.*)$": "<rootDir>/../src/lib/decorator/$1"
+    }
   },
   "packageManager": "yarn@3.5.0"
 }

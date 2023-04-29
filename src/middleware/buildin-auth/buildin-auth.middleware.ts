@@ -2,7 +2,7 @@ import { Injectable, NestMiddleware } from '@nestjs/common';
 import axios from 'axios';
 import { NextFunction, Request, Response } from 'express';
 
-import { setting } from '../../setting';
+import { setting } from '@/setting';
 
 const BUILDIN_AUTH_ROOT = setting.authServer.authURL;
 

@@ -20,6 +20,11 @@ interface DBSetting {
   readonly tablesync: boolean;
 }
 
+interface WorknetAPISetting {
+  readonly host: string;
+  readonly apiKey: string;
+}
+
 interface YouthPolicyAPISetting {
   readonly host: string;
   readonly apiKey: string;
@@ -34,6 +39,7 @@ export class Setting {
 
   public readonly was: WASSetting;
   public readonly db: DBSetting;
+  public readonly worknetAPI: WorknetAPISetting;
   public readonly youthPolicyAPI: YouthPolicyAPISetting;
   public readonly authServer: APIServerSetting;
 
@@ -53,6 +59,10 @@ export class Setting {
       user: getEnv('MYSQL_USER'),
       password: getEnv('MYSQL_PASSWORD'),
       tablesync: convertStringToBoolean(getEnv('MYSQL_TABLE_SYNC')),
+    };
+    this.worknetAPI = {
+      host: getEnv('WORKNET_API_HOST'),
+      apiKey: getEnv('WORKNET_API_KEY'),
     };
     this.youthPolicyAPI = {
       host: getEnv('YOUTH_POLICY_API_HOST'),

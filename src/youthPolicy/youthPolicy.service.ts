@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import { YouthPolicyAPIService } from '../lib/youthPolicyAPI.service';
-import { setting } from '../setting';
+import { YouthPolicyAPIService } from '@/api/youthPolicyAPI.service';
+import { setting } from '@/setting';
 
 import { PolicyDetailSearchDto } from './dto/PolicyDetailSearchDto';
 import { PolicyResultDto } from './dto/PolicyResultDto';

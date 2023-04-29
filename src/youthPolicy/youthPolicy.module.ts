@@ -1,7 +1,7 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 
-import { YouthPolicyAPIService } from '../lib/youthPolicyAPI.service';
-import { BuildinAuthMiddleware } from '../middleware/buildin-auth/buildin-auth.middleware';
+import { YouthPolicyAPIService } from '@/api/youthPolicyAPI.service';
+import { BuildinAuthMiddleware } from '@/middleware/buildin-auth/buildin-auth.middleware';
 
 import { YouthPolicyController } from './youthPolicy.controller';
 import { YouthPolicyService } from './youthPolicy.service';
