@@ -15,7 +15,7 @@ services:
     expose:
       - ${WAS_PORT}
     volumes:
-      - ./itnun-log:/log
+      - ./log:/log
     environment:
       - DOPPLER_TOKEN
     restart: always
