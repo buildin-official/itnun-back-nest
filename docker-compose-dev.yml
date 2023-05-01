@@ -15,7 +15,7 @@ services:
     ports:
       - ${WAS_PORT}:${WAS_PORT}
     volumes:
-      - ./itnun-log:/log
+      - ./log:/log
     environment:
       - DOPPLER_TOKEN
     restart: always
