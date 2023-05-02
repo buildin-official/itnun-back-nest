@@ -30,6 +30,10 @@ interface YouthPolicyAPISetting {
   readonly apiKey: string;
 }
 
+interface YouthNewsSetting {
+  readonly host: string;
+}
+
 interface APIServerSetting {
   readonly authURL: string;
 }
@@ -41,6 +45,7 @@ export class Setting {
   public readonly db: DBSetting;
   public readonly worknetAPI: WorknetAPISetting;
   public readonly youthPolicyAPI: YouthPolicyAPISetting;
+  public readonly youthNews: YouthNewsSetting;
   public readonly authServer: APIServerSetting;
 
   constructor() {
@@ -67,6 +72,9 @@ export class Setting {
     this.youthPolicyAPI = {
       host: getEnv('YOUTH_POLICY_API_HOST'),
       apiKey: getEnv('YOUTH_POLICY_API_KEY'),
+    };
+    this.youthNews = {
+      host: 'https://www.youthdaily.co.kr/news/section_list_all.html?sec_no=54',
     };
     this.authServer = {
       authURL: getEnv('AUTH_SERVER_URL'),
