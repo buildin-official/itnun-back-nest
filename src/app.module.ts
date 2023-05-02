@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { LoggerMiddleware } from './middleware/logger/logger.middleware';
 import { setting } from './setting';
 import { UserDetailModule } from './userDetail/userDetail.module';
+import { YouthNewsModule } from './youthNews/youthNews.module';
 import { YouthPolicyModule } from './youthPolicy/youthPolicy.module';
 
 @Module({
@@ -23,6 +24,7 @@ import { YouthPolicyModule } from './youthPolicy/youthPolicy.module';
     }),
     UserDetailModule,
     YouthPolicyModule,
+    YouthNewsModule,
   ],
   controllers: [AppController],
   providers: [AppService, Logger],
