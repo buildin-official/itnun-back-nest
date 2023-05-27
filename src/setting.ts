@@ -25,8 +25,10 @@ interface WorknetAPISetting {
   readonly apiKey: string;
 }
 
-interface YouthPolicyAPISetting {
+interface YouthAPISetting {
   readonly host: string;
+  readonly policyURI: string;
+  readonly spaceURI: string;
   readonly apiKey: string;
 }
 
@@ -44,7 +46,7 @@ export class Setting {
   public readonly was: WASSetting;
   public readonly db: DBSetting;
   public readonly worknetAPI: WorknetAPISetting;
-  public readonly youthPolicyAPI: YouthPolicyAPISetting;
+  public readonly youthAPI: YouthAPISetting;
   public readonly youthNews: YouthNewsSetting;
   public readonly authServer: APIServerSetting;
 
@@ -69,8 +71,10 @@ export class Setting {
       host: getEnv('WORKNET_API_HOST'),
       apiKey: getEnv('WORKNET_API_KEY'),
     };
-    this.youthPolicyAPI = {
-      host: getEnv('YOUTH_POLICY_API_HOST'),
+    this.youthAPI = {
+      host: 'https://www.youthcenter.go.kr/opi',
+      policyURI: '/empList.do',
+      spaceURI: '/wantedSpace.do',
       apiKey: getEnv('YOUTH_POLICY_API_KEY'),
     };
     this.youthNews = {

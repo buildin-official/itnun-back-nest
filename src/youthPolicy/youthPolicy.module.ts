@@ -1,6 +1,6 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 
-import { YouthPolicyAPIService } from '@/api/youthPolicyAPI.service';
+import { YouthAPIService } from '@/api/youthAPI.service';
 import { BuildinAuthMiddleware } from '@/middleware/buildin-auth/buildin-auth.middleware';
 
 import { YouthPolicyController } from './youthPolicy.controller';
@@ -9,7 +9,7 @@ import { YouthPolicyService } from './youthPolicy.service';
 @Module({
   imports: [],
   controllers: [YouthPolicyController],
-  providers: [YouthPolicyService, YouthPolicyAPIService],
+  providers: [YouthPolicyService, YouthAPIService],
 })
 export class YouthPolicyModule {
   configure(consumer: MiddlewareConsumer) {
