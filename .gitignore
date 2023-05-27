@@ -45,7 +45,7 @@ lerna-debug.log*
 !.yarn/versions
 
 mariadb/
-itnun-log/
+log/
 
 .env
 .env_test

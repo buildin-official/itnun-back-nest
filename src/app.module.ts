@@ -1,11 +1,13 @@
-import { Module } from '@nestjs/common';
+import { Logger, MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 // import { DatabaseModule } from './database/database.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { LoggerMiddleware } from './middleware/logger/logger.middleware';
 import { setting } from './setting';
 import { UserDetailModule } from './userDetail/userDetail.module';
+import { YouthNewsModule } from './youthNews/youthNews.module';
 import { YouthPolicyModule } from './youthPolicy/youthPolicy.module';
 
 @Module({
@@ -22,8 +24,13 @@ import { YouthPolicyModule } from './youthPolicy/youthPolicy.module';
     }),
     UserDetailModule,
     YouthPolicyModule,
+    YouthNewsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, Logger],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+}
