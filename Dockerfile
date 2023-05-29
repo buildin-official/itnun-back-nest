@@ -33,5 +33,4 @@ ENV NODE_ENV=production
 
 COPY --from=builder /app ./
 
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["doppler", "run", "--", "yarn", "start:prod"]
