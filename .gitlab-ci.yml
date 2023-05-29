@@ -24,7 +24,7 @@ deploy-job:
     - ssh-keyscan -p $PROD_SERVER_PORT $PROD_SERVER_HOST >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - docker build -t itnun-back .
+    - docker build -t itnun-back --env DOPPLER_TOKEN=$DOPPLER_TOKEN . 
     - ssh $PROD_SERVER_USER@$PROD_SERVER_HOST -p $PROD_SERVER_PORT "cd ~/docker-compose/itnun-back-nest && git pull gitlab main && sudo doppler run --token='$DOPPLER_TOKEN' -- docker compose -f docker-compose-prod.yml up -d --build"
 
   when: manual
