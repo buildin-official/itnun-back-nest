@@ -9,6 +9,7 @@ import { setting } from './setting';
 import { UserDetailModule } from './userDetail/userDetail.module';
 import { YouthNewsModule } from './youthNews/youthNews.module';
 import { YouthPolicyModule } from './youthPolicy/youthPolicy.module';
+import { YouthSpaceModule } from './youthSpace/youthSpace.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { YouthPolicyModule } from './youthPolicy/youthPolicy.module';
     }),
     UserDetailModule,
     YouthPolicyModule,
+    YouthSpaceModule,
     YouthNewsModule,
   ],
   controllers: [AppController],

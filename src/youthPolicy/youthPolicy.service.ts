@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { YouthPolicyAPIService } from '@/api/youthPolicyAPI.service';
+import { YouthAPIService } from '@/api/youthAPI.service';
 import { setting } from '@/setting';
 
 import { PolicyDetailSearchDto } from './dto/PolicyDetailSearchDto';
@@ -8,10 +8,10 @@ import { PolicyResultDto } from './dto/PolicyResultDto';
 
 @Injectable()
 export class YouthPolicyService {
-  constructor(private readonly youthAPI: YouthPolicyAPIService) {}
+  constructor(private readonly youthAPI: YouthAPIService) {}
   async generalSearch(searchKeyword: string, pageIndex: number): Promise<PolicyResultDto[]> {
-    const result = await this.youthAPI.queryAPI({
-      openApiVlak: setting.youthPolicyAPI.apiKey,
+    const result = await this.youthAPI.queryPolicyAPI({
+      openApiVlak: setting.youthAPI.apiKey,
       display: 10,
       pageIndex: pageIndex,
       query: searchKeyword,
@@ -19,8 +19,8 @@ export class YouthPolicyService {
     return result;
   }
   async detailSearch(detailSearchData: PolicyDetailSearchDto): Promise<PolicyResultDto[]> {
-    const result = await this.youthAPI.queryAPI({
-      openApiVlak: setting.youthPolicyAPI.apiKey,
+    const result = await this.youthAPI.queryPolicyAPI({
+      openApiVlak: setting.youthAPI.apiKey,
       display: 10,
       pageIndex: detailSearchData.pageIndex,
       query: detailSearchData.searchKeyword,
