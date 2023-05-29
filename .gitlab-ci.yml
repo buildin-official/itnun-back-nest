@@ -1,7 +1,7 @@
 image: docker:latest
 
 services:
-  - node:18
+  - node:latest
 
 stages:          # List of stages for jobs, and their order of execution
   - test-and-deploy
