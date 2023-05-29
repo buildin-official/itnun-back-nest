@@ -18,7 +18,7 @@ RUN yarn
 
 COPY . .
 
-RUN doppler run -- yarn build
+RUN yarn build
 
 
 FROM node:18-alpine
