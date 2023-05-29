@@ -9,28 +9,35 @@
     "prepare": "husky install",
     "build": "nest build",
     "start": "nest start",
-    "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
+    "start:dev": "doppler run -- nest start --watch",
+    "start:debug": "doppler run -- nest start --debug --watch",
     "start:prod": "node dist/main",
-    "test": "DOTENV_CONFIG_PATH=.env_test jest --setupFiles dotenv/config",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "DOTENV_CONFIG_PATH=.env_test jest --config ./test/jest-e2e.json --setupFiles dotenv/config",
+    "test": "doppler run -- jest",
+    "test:watch": "doppler run -- jest --watch",
+    "test:cov": "doppler run -- jest --coverage",
+    "test:debug": "doppler run -- node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "doppler run -- jest --config ./test/jest-e2e.json",
     "lint": "eslint --ext .ts,.tsx . && prettier --check .",
     "lint:fix": "eslint --ext .ts,.tsx . --fix && prettier --write ."
   },
   "dependencies": {
+    "@nestjs/axios": "^2.0.0",
     "@nestjs/common": "^9.4.0",
     "@nestjs/core": "^9.4.0",
     "@nestjs/platform-express": "^9.4.0",
     "@nestjs/typeorm": "^9.0.1",
+    "axios": "^1.3.6",
+    "cheerio": "^1.0.0-rc.12",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "mysql2": "^3.2.3",
+    "nest-winston": "^1.9.1",
+    "qs": "^6.11.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
-    "typeorm": "^0.3.15"
+    "typeorm": "^0.3.15",
+    "winston": "^3.8.2",
+    "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.4.1",
@@ -72,7 +79,11 @@
       "**/*.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/../src/$1",
+      "^@decorator/(.*)$": "<rootDir>/../src/lib/decorator/$1"
+    }
   },
   "packageManager": "yarn@3.5.0"
 }

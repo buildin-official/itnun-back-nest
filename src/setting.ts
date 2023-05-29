@@ -1,67 +1,96 @@
-function convertStringToBoolean(str: string): boolean {
-  if (str === '0') {
-    return false;
-  } else if (str === '1') {
-    return true;
-  } else {
-    throw new Error('Input string must be either "0" or "1"');
-  }
-}
-class WASSetting {
-  readonly port: number;
-  readonly authServerURL: string;
-  constructor() {
-    if (!process.env.WAS_PORT) throw new Error('WAS_PORT is not defined');
-    if (!process.env.AUTH_SERVER_URL) throw new Error('AUTH_SERVER_URL is not defined');
-    this.port = Number(process.env.WAS_PORT);
-    this.authServerURL = process.env.AUTH_SERVER_URL;
-  }
+const convertStringToBoolean = (str: string): boolean => (str === '1' ? true : false);
+
+function getEnv(target: string) {
+  const value = process.env[target];
+  if (!value) throw new Error(`${target} is not defined`);
+  return value;
 }
 
-class DBSetting {
+interface WASSetting {
+  readonly port: number;
+  readonly authServerURL: string;
+}
+
+interface DBSetting {
   readonly host: string;
   readonly port: number;
   readonly database: string;
   readonly user: string;
   readonly password: string;
   readonly tablesync: boolean;
-  // get these env variables and if not exist, raise error
-  constructor() {
-    if (!process.env.MYSQL_HOSTNAME) throw new Error('MYSQL_HOSTNAME is not defined');
-    if (!process.env.MYSQL_PORT) throw new Error('MYSQL_PORT is not defined');
-    if (!process.env.MYSQL_DATABASE) throw new Error('MYSQL_DATABASE is not defined');
-    if (!process.env.MYSQL_USER) throw new Error('MYSQL_USER is not defined');
-    if (!process.env.MYSQL_PASSWORD) throw new Error('MYSQL_PASSWORD is not defined');
-    if (!process.env.MYSQL_TABLE_SYNC) throw new Error('TABLE_SYNC is not defined');
-    this.host = process.env.MYSQL_HOSTNAME;
-    this.port = Number(process.env.MYSQL_PORT);
-    this.database = process.env.MYSQL_DATABASE;
-    this.user = process.env.MYSQL_USER;
-    this.password = process.env.MYSQL_PASSWORD;
-    this.tablesync = convertStringToBoolean(process.env.MYSQL_TABLE_SYNC);
-  }
 }
 
-class YouthPolicyAPISetting {
+interface WorknetAPISetting {
   readonly host: string;
   readonly apiKey: string;
+}
+
+interface YouthAPISetting {
+  readonly host: string;
+  readonly policyURI: string;
+  readonly spaceURI: string;
+  readonly apiKey: string;
+}
+
+interface YouthNewsSetting {
+  readonly host: string;
+}
+
+interface APIServerSetting {
+  readonly authURL: string;
+}
+
+export class Setting {
+  private static _instance: Setting;
+
+  public readonly was: WASSetting;
+  public readonly db: DBSetting;
+  public readonly worknetAPI: WorknetAPISetting;
+  public readonly youthAPI: YouthAPISetting;
+  public readonly youthNews: YouthNewsSetting;
+  public readonly authServer: APIServerSetting;
+
   constructor() {
-    if (!process.env.YOUTH_POLICY_API_HOST) throw new Error('YOUTH_POLICY_API_HOST is not defined');
-    if (!process.env.YOUTH_POLICY_API_KEY) throw new Error('YOUTH_POLICY_API_KEY is not defined');
-    this.host = process.env.YOUTH_POLICY_API_HOST;
-    this.apiKey = process.env.YOUTH_POLICY_API_KEY;
+    if (Setting._instance) {
+      throw new Error('Error - use Setting.getInstance()');
+    }
+
+    this.was = {
+      port: Number(getEnv('WAS_PORT')),
+      authServerURL: getEnv('AUTH_SERVER_URL'),
+    };
+    this.db = {
+      host: getEnv('MYSQL_HOSTNAME'),
+      port: Number(getEnv('MYSQL_PORT')),
+      database: getEnv('MYSQL_DATABASE'),
+      user: getEnv('MYSQL_USER'),
+      password: getEnv('MYSQL_PASSWORD'),
+      tablesync: convertStringToBoolean(getEnv('MYSQL_TABLE_SYNC')),
+    };
+    this.worknetAPI = {
+      host: getEnv('WORKNET_API_HOST'),
+      apiKey: getEnv('WORKNET_API_KEY'),
+    };
+    this.youthAPI = {
+      host: 'https://www.youthcenter.go.kr/opi',
+      policyURI: '/empList.do',
+      spaceURI: '/wantedSpace.do',
+      apiKey: getEnv('YOUTH_POLICY_API_KEY'),
+    };
+    this.youthNews = {
+      host: 'https://www.youthdaily.co.kr/news/section_list_all.html?sec_no=54',
+    };
+    this.authServer = {
+      authURL: getEnv('AUTH_SERVER_URL'),
+    };
+  }
+
+  public static getInstance(): Setting {
+    if (!this._instance) {
+      this._instance = new Setting();
+    }
+    return this._instance;
   }
 }
 
-class Setting {
-  readonly was: WASSetting;
-  readonly db: DBSetting;
-  readonly youthPolicyAPI: YouthPolicyAPISetting;
-  constructor() {
-    this.was = new WASSetting();
-    this.db = new DBSetting();
-    this.youthPolicyAPI = new YouthPolicyAPISetting();
-  }
-}
-
-export const setting = new Setting();
+export const setting = Setting.getInstance();
