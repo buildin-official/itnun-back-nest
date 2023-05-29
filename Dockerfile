@@ -18,7 +18,7 @@ RUN yarn
 
 COPY . .
 
-RUN doppler run -- yarn build
+RUN yarn build
 
 
 FROM node:18-alpine
@@ -34,3 +34,4 @@ ENV NODE_ENV=production
 COPY --from=builder /app ./
 
 CMD ["doppler", "run", "--", "yarn", "start:prod"]
+
