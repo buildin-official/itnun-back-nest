@@ -36,6 +36,12 @@ interface YouthNewsSetting {
   readonly host: string;
 }
 
+interface GeoCodingAPISetting {
+  readonly host: string;
+  readonly apiID: string;
+  readonly apiKey: string;
+}
+
 interface APIServerSetting {
   readonly authURL: string;
 }
@@ -48,6 +54,7 @@ export class Setting {
   public readonly worknetAPI: WorknetAPISetting;
   public readonly youthAPI: YouthAPISetting;
   public readonly youthNews: YouthNewsSetting;
+  public readonly geoCodingAPI: GeoCodingAPISetting;
   public readonly authServer: APIServerSetting;
 
   constructor() {
@@ -79,6 +86,11 @@ export class Setting {
     };
     this.youthNews = {
       host: 'https://www.youthdaily.co.kr/news/section_list_all.html?sec_no=54',
+    };
+    this.geoCodingAPI = {
+      host: 'https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode',
+      apiID: getEnv('NAVER_API_ID'),
+      apiKey: getEnv('NAVER_API_KEY'),
     };
     this.authServer = {
       authURL: getEnv('AUTH_SERVER_URL'),
