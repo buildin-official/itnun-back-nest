@@ -1,3 +1,9 @@
+export const payTypeCodeList = ['D', 'H', 'M', 'Y'];
+
+export const educationCodeList = ['00', '01', '02', '03', '04', '05', '06', '07'];
+
+export const careerCodeList = ['N', 'E', 'Z'];
+
 export const localCodeList = [
   11110, 11140, 11170, 11200, 11215, 11230, 11260, 11290, 11305, 11320, 11350, 11380, 11410, 11440, 11470, 11500, 11530,
   11545, 11560, 11590, 11620, 11650, 11680, 11710, 11740, 26110, 26140, 26170, 26200, 26230, 26260, 26290, 26320, 26350,
@@ -141,6 +147,10 @@ export const majorCodeList = [
   '070605',
   '070606',
 ];
+
+export const workTypeCodeList = [1, 2, 3, 9];
+
+export const workConvCodeList = ['01', '02', '04', '11', '12', '13', '06', '09'];
 
 export const computerSkillCodeList = [1, 2, 4, 6, 9];
 

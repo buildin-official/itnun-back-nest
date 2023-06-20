@@ -3,35 +3,7 @@ import axios, { AxiosInstance } from 'axios';
 import { load } from 'cheerio';
 
 import { setting } from '@/setting';
-
-export interface RecruitInfoSearchResponse {
-  wantedAuthNo: string;
-  companyName: string;
-  businessNo: string;
-  recruitTitle: string;
-  salaryType: string;
-  salary: string;
-  minSalary: string;
-  maxSalary: string;
-  region: string;
-  holidayType: string;
-  minEducation: string;
-  maxEducation: string;
-  career: string;
-  registerDate: string;
-  closeDate: string;
-  infoSvc: string;
-  infoUrl: string;
-  mobileInfoUrl: string;
-  zipCode: string;
-  streetNameCode: string;
-  basicAddress: string;
-  detailAddress: string;
-  employmentType: number;
-  jobsCode: number;
-  modifyDate: number;
-  prefCode: string;
-}
+import { RecruitResultDto } from '@/youthRecruit/dto/RecruitResultDto';
 
 function paramMaker(params: Record<string, unknown>) {
   const result: string[] = [];
@@ -109,7 +81,7 @@ export class RecruitInfoAPIService {
 
     const wantedList = $('wantedRoot').find('wanted');
 
-    const result: RecruitInfoSearchResponse[] = [];
+    const result: RecruitResultDto[] = [];
 
     for (const wanted of wantedList) {
       result.push({
