@@ -25,13 +25,21 @@ interface WorknetAPISetting {
   readonly apiKey: string;
 }
 
-interface YouthPolicyAPISetting {
+interface YouthAPISetting {
   readonly host: string;
+  readonly policyURI: string;
+  readonly spaceURI: string;
   readonly apiKey: string;
 }
 
 interface YouthNewsSetting {
   readonly host: string;
+}
+
+interface GeoCodingAPISetting {
+  readonly host: string;
+  readonly apiID: string;
+  readonly apiKey: string;
 }
 
 interface APIServerSetting {
@@ -44,8 +52,9 @@ export class Setting {
   public readonly was: WASSetting;
   public readonly db: DBSetting;
   public readonly worknetAPI: WorknetAPISetting;
-  public readonly youthPolicyAPI: YouthPolicyAPISetting;
+  public readonly youthAPI: YouthAPISetting;
   public readonly youthNews: YouthNewsSetting;
+  public readonly geoCodingAPI: GeoCodingAPISetting;
   public readonly authServer: APIServerSetting;
 
   constructor() {
@@ -69,12 +78,19 @@ export class Setting {
       host: getEnv('WORKNET_API_HOST'),
       apiKey: getEnv('WORKNET_API_KEY'),
     };
-    this.youthPolicyAPI = {
-      host: getEnv('YOUTH_POLICY_API_HOST'),
+    this.youthAPI = {
+      host: 'https://www.youthcenter.go.kr/opi',
+      policyURI: '/empList.do',
+      spaceURI: '/wantedSpace.do',
       apiKey: getEnv('YOUTH_POLICY_API_KEY'),
     };
     this.youthNews = {
       host: 'https://www.youthdaily.co.kr/news/section_list_all.html?sec_no=54',
+    };
+    this.geoCodingAPI = {
+      host: 'https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode',
+      apiID: getEnv('NAVER_API_ID'),
+      apiKey: getEnv('NAVER_API_KEY'),
     };
     this.authServer = {
       authURL: getEnv('AUTH_SERVER_URL'),
