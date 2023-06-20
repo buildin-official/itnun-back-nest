@@ -10,7 +10,7 @@ function paramMaker(params: Record<string, unknown>) {
 
   for (const key of Object.keys(params)) {
     const value = params[key];
-    if (value === undefined) continue; 
+    if (value === undefined) continue;
     result.push(`${key}=${value instanceof Array ? value.join('|') : String(value)}`);
   }
 

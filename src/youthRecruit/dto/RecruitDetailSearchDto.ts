@@ -1,7 +1,5 @@
 import { ArrayMaxSize, IsIn, IsNumber, IsOptional, IsString, Length, Max, MaxLength, Min } from 'class-validator';
 
-import { AllIsInArray } from '@/lib/decorator/AllIsInArray';
-
 import {
   careerCodeList,
   computerSkillCodeList,
@@ -12,7 +10,8 @@ import {
   preferentialCodeList,
   workConvCodeList,
   workTypeCodeList,
-} from './CodeConstant';
+} from '@/lib/constants/worknetConstants';
+import { AllIsInArray } from '@/lib/decorator/AllIsInArray';
 
 export class RecruitDetailSearchDto {
   @IsNumber()
@@ -52,12 +51,12 @@ export class RecruitDetailSearchDto {
   @IsNumber()
   @Min(0)
   @Max(999)
-  minCareerM?: number;
+  minCareerMonth?: number;
 
   @IsOptional()
   @Min(0)
   @Max(999)
-  maxCareerM?: number;
+  maxCareerMonth?: number;
 
   @IsOptional()
   @IsIn(educationCodeList)

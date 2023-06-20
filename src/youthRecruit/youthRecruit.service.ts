@@ -19,19 +19,19 @@ export class YouthRecruitService {
     console.log(detailSearchData.payType);
     const result = this.recruitAPI.queryWithPagination(setting.worknetAPI.apiKey, 10, detailSearchData.pageIndex, {
       keyword: detailSearchData.searchKeywords,
-      // salTp: detailSearchData.payType,
-      // minPay: detailSearchData.minPay,
-      // maxPay: detailSearchData.maxPay,
-      // region: detailSearchData.region,
-      // // career: detailSearchData.career,
-      // minCareerMonth: detailSearchData.minCareerM,
-      // maxCareerMonth: detailSearchData.maxCareerM,
-      // education: detailSearchData.education,
-      // major: detailSearchData.major,
-      // holidayTp: detailSearchData.workType,
-      // welfare: detailSearchData.workConv,
-      // comPreferential: detailSearchData.computerSkill,
-      // pfPreferential: detailSearchData.preferential,
+      salTp: detailSearchData.payType,
+      minPay: detailSearchData.minPay,
+      maxPay: detailSearchData.maxPay,
+      region: detailSearchData.region,
+      // career: detailSearchData.career,
+      minCareerMonth: detailSearchData.minCareerMonth,
+      maxCareerMonth: detailSearchData.maxCareerMonth,
+      education: detailSearchData.education,
+      major: detailSearchData.major,
+      holidayTp: detailSearchData.workType,
+      welfare: detailSearchData.workConv,
+      comPreferential: detailSearchData.computerSkill,
+      pfPreferential: detailSearchData.preferential,
     });
     return result;
   }
