@@ -10,18 +10,22 @@ export class YouthRecruitController {
 
   @Get('/search')
   async recruitGeneralSearch(
-    @Query('searchKeyword') searchKeyword: string,
+    @Query('searchKeywords') searchKeywords: string,
     @Query('pageIndex') pageIndex: number,
   ): Promise<string> {
-    if (searchKeyword == null) {
-      return 'Search Keyword is Null!';
+    if (searchKeywords == null) {
+      return 'searchKeywords is Null!';
     }
-    const result = await this.youthRecruit.generalSearch(searchKeyword, pageIndex);
+    if (pageIndex == null) {
+      return 'pageIndex is Null!';
+    }
+    const listedSearchKeywords = searchKeywords.split(',');
+    const result = await this.youthRecruit.generalSearch(listedSearchKeywords, pageIndex);
     return Object.assign(instanceToPlain(result));
   }
   @Post('/search')
   async recruitDetailSearch(@Body() detailSearchData: RecruitDetailSearchDto): Promise<string> {
-    const result = {};
+    const result = await this.youthRecruit.detailSearch(detailSearchData);
     return Object.assign(instanceToPlain(result));
   }
 }

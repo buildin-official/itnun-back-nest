@@ -9,6 +9,7 @@ import { setting } from './setting';
 import { UserDetailModule } from './userDetail/userDetail.module';
 import { YouthNewsModule } from './youthNews/youthNews.module';
 import { YouthPolicyModule } from './youthPolicy/youthPolicy.module';
+import { YouthRecruitModule } from './youthRecruit/youthRecruit.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { YouthPolicyModule } from './youthPolicy/youthPolicy.module';
     UserDetailModule,
     YouthPolicyModule,
     YouthNewsModule,
+    YouthRecruitModule,
   ],
   controllers: [AppController],
   providers: [AppService, Logger],

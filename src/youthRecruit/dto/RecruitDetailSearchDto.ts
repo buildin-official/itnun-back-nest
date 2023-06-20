@@ -1,4 +1,4 @@
-import { IsIn, IsNumber, IsOptional, IsString, Length, Max, Min } from 'class-validator';
+import { ArrayMaxSize, IsIn, IsNumber, IsOptional, IsString, Length, Max, MaxLength, Min } from 'class-validator';
 
 import { AllIsInArray } from '@/lib/decorator/AllIsInArray';
 
@@ -21,65 +21,69 @@ export class RecruitDetailSearchDto {
   pageIndex: number;
 
   @IsOptional()
-  @IsString()
-  @Length(1, 50)
-  searchKeyword: string;
+  @ArrayMaxSize(10)
+  @IsString({ each: true })
+  @Length(1, 50, { each: true })
+  searchKeywords?: string[];
 
   @IsOptional()
   @IsIn(payTypeCodeList)
-  payType: string;
+  payType?: 'D' | 'H' | 'M' | 'Y';
 
   @IsOptional()
   @IsNumber()
   @Min(1)
-  @Max(99999)
-  minPay: number;
+  minPay?: number;
 
   @IsOptional()
   @IsNumber()
   @Min(1)
-  @Max(99999)
-  maxPay: string;
+  maxPay?: number;
 
   @IsOptional()
-  @IsIn(localCodeList)
-  region: string;
+  @AllIsInArray(localCodeList)
+  region?: string[];
 
   @IsOptional()
   @IsIn(careerCodeList)
-  career: string;
+  career?: 'N' | 'E' | 'Z';
 
   @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(999)
-  minCareerM: number;
+  minCareerM?: number;
 
+  @IsOptional()
   @Min(0)
   @Max(999)
-  maxCareerM: number;
+  maxCareerM?: number;
 
   @IsOptional()
   @IsIn(educationCodeList)
-  education: string;
+  education?: string;
 
   @IsOptional()
   @IsIn(majorCodeList)
-  major: string;
+  major?: string;
 
   @IsOptional()
+  @ArrayMaxSize(4)
   @AllIsInArray(workTypeCodeList)
-  workType: string[];
+  workType?: Array<'1' | '2' | '3' | '9'>;
 
   @IsOptional()
+  @ArrayMaxSize(8)
   @AllIsInArray(workConvCodeList)
-  workConv: string[];
+  workConv?: Array<'01' | '02' | '04' | '11' | '12' | '13' | '06' | '09'>;
 
   @IsOptional()
+  @ArrayMaxSize(5)
   @AllIsInArray(computerSkillCodeList)
-  computerSkill: number[];
+  computerSkill?: Array<'1' | '2' | '4' | '6' | '9'>;
 
   @IsOptional()
+  @ArrayMaxSize(7)
   @AllIsInArray(preferentialCodeList)
-  preferential: string[];
+  preferential?: Array<'05' | '07' | '08' | '09' | '10' | '14' | 'S' | 'B'>;
 }

@@ -36,7 +36,7 @@ export class RecruitInfoAPIService {
       salTp?: 'D' | 'H' | 'M' | 'Y';
       minPay?: number;
       maxPay?: number;
-      education?: Array<string>;
+      education?: string;
       career?: 'N' | 'E' | 'Z';
       minCareerMonth?: number;
       maxCareerMonth?: number;
@@ -56,7 +56,7 @@ export class RecruitInfoAPIService {
       keyword?: Array<string>;
       empTpGb?: '1' | '2';
       sortOrderBy?: 'DESC' | 'ASC';
-      major?: Array<string>;
+      major?: string;
       foreignLanguage?: Array<string>;
       comPreferential?: Array<'1' | '2' | '4' | '6' | '9'>;
       pfPreferential?: Array<'05' | '07' | '08' | '09' | '10' | '14' | 'S' | 'B'>;
@@ -68,7 +68,7 @@ export class RecruitInfoAPIService {
         authKey,
         callTp: 'L',
         returnType: 'xml',
-        startPage: count * (page - 1) + 1,
+        startPage: page,
         display: count,
         coTp: '09',
         ...params,
