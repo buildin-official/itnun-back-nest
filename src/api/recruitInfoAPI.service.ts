@@ -3,41 +3,14 @@ import axios, { AxiosInstance } from 'axios';
 import { load } from 'cheerio';
 
 import { setting } from '@/setting';
-
-export interface RecruitInfoSearchResponse {
-  wantedAuthNo: string;
-  companyName: string;
-  businessNo: string;
-  recruitTitle: string;
-  salaryType: string;
-  salary: string;
-  minSalary: string;
-  maxSalary: string;
-  region: string;
-  holidayType: string;
-  minEducation: string;
-  maxEducation: string;
-  career: string;
-  registerDate: string;
-  closeDate: string;
-  infoSvc: string;
-  infoUrl: string;
-  mobileInfoUrl: string;
-  zipCode: string;
-  streetNameCode: string;
-  basicAddress: string;
-  detailAddress: string;
-  employmentType: number;
-  jobsCode: number;
-  modifyDate: number;
-  prefCode: string;
-}
+import { RecruitResultDto } from '@/youthRecruit/dto/RecruitResultDto';
 
 function paramMaker(params: Record<string, unknown>) {
   const result: string[] = [];
 
   for (const key of Object.keys(params)) {
     const value = params[key];
+    if (value === undefined) continue;
     result.push(`${key}=${value instanceof Array ? value.join('|') : String(value)}`);
   }
 
@@ -64,7 +37,7 @@ export class RecruitInfoAPIService {
       salTp?: 'D' | 'H' | 'M' | 'Y';
       minPay?: number;
       maxPay?: number;
-      education?: Array<string>;
+      education?: string;
       career?: 'N' | 'E' | 'Z';
       minCareerMonth?: number;
       maxCareerMonth?: number;
@@ -84,7 +57,7 @@ export class RecruitInfoAPIService {
       keyword?: Array<string>;
       empTpGb?: '1' | '2';
       sortOrderBy?: 'DESC' | 'ASC';
-      major?: Array<string>;
+      major?: string;
       foreignLanguage?: Array<string>;
       comPreferential?: Array<'1' | '2' | '4' | '6' | '9'>;
       pfPreferential?: Array<'05' | '07' | '08' | '09' | '10' | '14' | 'S' | 'B'>;
@@ -96,7 +69,7 @@ export class RecruitInfoAPIService {
         authKey,
         callTp: 'L',
         returnType: 'xml',
-        startPage: count * (page - 1) + 1,
+        startPage: page,
         display: count,
         coTp: '09',
         ...params,
@@ -109,7 +82,7 @@ export class RecruitInfoAPIService {
 
     const wantedList = $('wantedRoot').find('wanted');
 
-    const result: RecruitInfoSearchResponse[] = [];
+    const result: RecruitResultDto[] = [];
 
     for (const wanted of wantedList) {
       result.push({
