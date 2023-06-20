@@ -8,22 +8,23 @@ export class UserDetail extends BaseEntity {
   @Column({ type: 'varchar', length: 8, nullable: true })
   birthDate: string;
 
-  @Column({ type: 'int', nullable: true })
-  localCode: number;
+  @Column({ type: 'varchar', length: 5, nullable: true })
+  localCode: string;
 
   @Column({ type: 'tinyint', nullable: true })
   employStatus: number;
 
-  @Column({ type: 'tinyint', nullable: true })
-  carrerYear: number;
+  @Column({ type: 'int', nullable: true })
+  carrerMonth: number;
 
-  @Column({ type: 'tinyint', nullable: true })
-  education: number;
+  @Column({ type: 'varchar', length: 2, nullable: true })
+  education: string;
 
   @Column({ type: 'varchar', length: 6, nullable: true })
   major: string;
+
   @Column({ type: 'simple-array', nullable: true })
-  computerSkill: number[];
+  computerSkill: string[];
 
   @Column({ type: 'simple-array', nullable: true })
   preferential: string[];
