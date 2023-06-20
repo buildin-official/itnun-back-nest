@@ -23,7 +23,7 @@ export class YouthRecruitService {
       minPay: detailSearchData.minPay,
       maxPay: detailSearchData.maxPay,
       region: detailSearchData.region,
-      // career: detailSearchData.career,
+      career: detailSearchData.career,
       minCareerMonth: detailSearchData.minCareerMonth,
       maxCareerMonth: detailSearchData.maxCareerMonth,
       education: detailSearchData.education,

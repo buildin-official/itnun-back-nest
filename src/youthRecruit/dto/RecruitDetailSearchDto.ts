@@ -1,4 +1,4 @@
-import { ArrayMaxSize, IsIn, IsNumber, IsOptional, IsString, Length, Max, MaxLength, Min } from 'class-validator';
+import { ArrayMaxSize, IsIn, IsNumber, IsOptional, IsString, Length, Max, Min } from 'class-validator';
 
 import {
   careerCodeList,
