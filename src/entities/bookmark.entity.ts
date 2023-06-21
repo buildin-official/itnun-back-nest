@@ -3,6 +3,9 @@ import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } 
 @Entity({ name: 'policy_bookmark' })
 export class PolicyBookmark extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
+  bookmarkID: string;
+
+  @Column({ type: 'uuid', nullable: false })
   userUUID: string;
 
   @Column({ type: 'varchar', length: 14, nullable: false })
@@ -15,6 +18,9 @@ export class PolicyBookmark extends BaseEntity {
 @Entity({ name: 'place_bookmark' })
 export class PlaceBookmark extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
+  bookmarkID: string;
+
+  @Column({ type: 'uuid', nullable: false })
   userUUID: string;
 
   @Column({ type: 'varchar', length: 12, nullable: false })
@@ -23,9 +29,27 @@ export class PlaceBookmark extends BaseEntity {
   @CreateDateColumn()
   created_at: Date;
 }
+@Entity({ name: 'recurit_bookmark' })
+export class RecuritBookmark extends BaseEntity {
+  @PrimaryGeneratedColumn('uuid')
+  bookmarkID: string;
+
+  @Column({ type: 'uuid', nullable: false })
+  userUUID: string;
+
+  @Column({ type: 'varchar', length: 16, nullable: false })
+  recuritID: string;
+
+  @CreateDateColumn()
+  created_at: Date;
+}
+
 @Entity({ name: 'good_shop_bookmark' })
 export class GoodShopBookmark extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
+  bookmarkID: string;
+
+  @Column({ type: 'uuid', nullable: false })
   userUUID: string;
 
   @Column({ type: 'int', nullable: false })

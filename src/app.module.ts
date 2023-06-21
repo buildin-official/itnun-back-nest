@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 // import { DatabaseModule } from './database/database.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { BookmarkModule } from './bookmark/bookmark.module';
 import { GeoCodingModule } from './geoCoding/geoCoding.module';
 import { LoggerMiddleware } from './middleware/logger/logger.middleware';
 import { setting } from './setting';
@@ -29,6 +30,7 @@ import { YouthSpaceModule } from './youthSpace/youthSpace.module';
     YouthSpaceModule,
     YouthNewsModule,
     GeoCodingModule,
+    BookmarkModule,
   ],
   controllers: [AppController],
   providers: [AppService, Logger],

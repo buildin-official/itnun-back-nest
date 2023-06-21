@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 
 import { UserDetail } from '@/entities/userDetail.entity';
 
-import { UserDetailUpdateReqDto } from './dto/UserDetailUpdateReqDto';
+import { UserDetailUpdateReqDto } from './dto/UserDetailUpdateDto';
 
 @Injectable()
 export class UserDetailService {
@@ -12,9 +12,6 @@ export class UserDetailService {
     this.userDetailRepository = userDetailRepository;
   }
 
-  // getHello(): string {
-  //   return 'Hello UserDetail!';
-  // }
   async updateUserDetail(userUUID: string, userDetailReq: UserDetailUpdateReqDto): Promise<void> {
     const newUserDetail = new UserDetail();
     newUserDetail.userUUID = userUUID;

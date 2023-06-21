@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { instanceToPlain } from 'class-transformer';
 import { Request } from 'express';
 
-import { UserDetailUpdateReqDto } from './dto/UserDetailUpdateReqDto';
+import { UserDetailUpdateReqDto } from './dto/UserDetailUpdateDto';
 import { UserDetailService } from './userDetail.service';
 
 @Controller('userdetail')
