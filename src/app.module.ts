@@ -1,7 +1,6 @@
 import { Logger, MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-// import { DatabaseModule } from './database/database.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BookmarkModule } from './bookmark/bookmark.module';
@@ -11,6 +10,7 @@ import { setting } from './setting';
 import { UserDetailModule } from './userDetail/userDetail.module';
 import { YouthNewsModule } from './youthNews/youthNews.module';
 import { YouthPolicyModule } from './youthPolicy/youthPolicy.module';
+import { YouthRecruitModule } from './youthRecruit/youthRecruit.module';
 import { YouthSpaceModule } from './youthSpace/youthSpace.module';
 
 @Module({
@@ -29,6 +29,7 @@ import { YouthSpaceModule } from './youthSpace/youthSpace.module';
     YouthPolicyModule,
     YouthSpaceModule,
     YouthNewsModule,
+    YouthRecruitModule,
     GeoCodingModule,
     BookmarkModule,
   ],

@@ -18,7 +18,7 @@ export class UserDetailService {
     newUserDetail.birthDate = userDetailReq.birthDate == undefined ? null : userDetailReq.birthDate;
     newUserDetail.localCode = userDetailReq.localCode == undefined ? null : userDetailReq.localCode;
     newUserDetail.employStatus = userDetailReq.employStatus == undefined ? null : userDetailReq.employStatus;
-    newUserDetail.carrerYear = userDetailReq.carrerYear == undefined ? null : userDetailReq.carrerYear;
+    newUserDetail.carrerMonth = userDetailReq.carrerMonth == undefined ? null : userDetailReq.carrerMonth;
     newUserDetail.education = userDetailReq.education == undefined ? null : userDetailReq.education;
     newUserDetail.major = userDetailReq.major == undefined ? null : userDetailReq.major;
     newUserDetail.computerSkill = userDetailReq.computerSkill == undefined ? null : userDetailReq.computerSkill;
