@@ -46,17 +46,17 @@ export class BookmarkController {
     return 'Delete Bookmark Success!';
   }
 
-  @Get('/recurit')
+  @Get('/recruit')
   async getRecuritBookmark(@Req() req: Request): Promise<string> {
     const result = await this.bookmark.getUserRecuritBookmark(req.userId);
     return Object.assign(result);
   }
-  @Post('/recurit')
+  @Post('/recruit')
   async updateRecuritBookmark(@Req() req: Request, @Body() recurit: RecuritBookmarkDto): Promise<string> {
     await this.bookmark.updateRecuritBookmark(req.userId, recurit.recuritID);
     return 'Update Bookmark Success!';
   }
-  @Delete('/recurit')
+  @Delete('/recruit')
   async deleteRecuritBookmark(@Req() req: Request, @Body() bookmark: BookmarkRemoveDto): Promise<string> {
     await this.bookmark.deleteRecuritBookmark(req.userId, bookmark.bookmarkID);
     return 'Delete Bookmark Success!';
