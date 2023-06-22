@@ -12,10 +12,10 @@ export class PlaceBookmarkDto {
   placeID: string;
 }
 
-export class RecuritBookmarkDto {
+export class RecruitBookmarkDto {
   @IsString()
   @Length(16, 16)
-  recuritID: string;
+  recruitID: string;
 }
 
 export class GoodShopBookmarkDto {

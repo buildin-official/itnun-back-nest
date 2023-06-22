@@ -29,8 +29,8 @@ export class PlaceBookmark extends BaseEntity {
   @CreateDateColumn()
   created_at: Date;
 }
-@Entity({ name: 'recurit_bookmark' })
-export class RecuritBookmark extends BaseEntity {
+@Entity({ name: 'recruit_bookmark' })
+export class RecruitBookmark extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   bookmarkID: string;
 
@@ -38,7 +38,7 @@ export class RecuritBookmark extends BaseEntity {
   userUUID: string;
 
   @Column({ type: 'varchar', length: 16, nullable: false })
-  recuritID: string;
+  recruitID: string;
 
   @CreateDateColumn()
   created_at: Date;

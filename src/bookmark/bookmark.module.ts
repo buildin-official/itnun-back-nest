@@ -1,14 +1,14 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { GoodShopBookmark, PlaceBookmark, PolicyBookmark, RecuritBookmark } from '@/entities/bookmark.entity';
+import { GoodShopBookmark, PlaceBookmark, PolicyBookmark, RecruitBookmark } from '@/entities/bookmark.entity';
 import { BuildinAuthMiddleware } from '@/middleware/buildin-auth/buildin-auth.middleware';
 
 import { BookmarkController } from './bookmark.controller';
 import { BookmarkService } from './bookmark.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([PolicyBookmark, PlaceBookmark, RecuritBookmark, GoodShopBookmark])],
+  imports: [TypeOrmModule.forFeature([PolicyBookmark, PlaceBookmark, RecruitBookmark, GoodShopBookmark])],
   controllers: [BookmarkController],
   providers: [BookmarkService],
 })
