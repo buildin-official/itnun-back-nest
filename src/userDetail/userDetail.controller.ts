@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Req } from '@nestjs/common';
 import { instanceToPlain } from 'class-transformer';
 import { Request } from 'express';
 
@@ -21,5 +21,10 @@ export class UserDetailController {
   async postUserDetail(@Req() req: Request, @Body() userDetail: UserDetailUpdateReqDto): Promise<string> {
     await this.userDetail.updateUserDetail(req.userId, userDetail);
     return 'Update UserDetail Success!';
+  }
+  @Delete('/')
+  async deleteUserDetail(@Req() req: Request): Promise<string> {
+    await this.userDetail.deleteUserDetail(req.userId);
+    return 'Delete UserDetail Success!';
   }
 }
