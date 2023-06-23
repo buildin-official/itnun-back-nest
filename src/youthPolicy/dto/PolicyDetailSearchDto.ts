@@ -2,7 +2,7 @@ import { IsNumber, IsOptional, IsString, Length, Max, Min } from 'class-validato
 
 import { AllIsInArray } from '@/lib/decorator/AllIsInArray';
 
-import { policyLocationCodeList, policyTypeCodeList } from './CodeConstant';
+import { policyLocationCodeList, policyTypeCodeList } from '../../lib/constants/policyConstant';
 
 export class PolicyDetailSearchDto {
   @IsNumber()
