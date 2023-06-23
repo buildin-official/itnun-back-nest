@@ -28,6 +28,11 @@ export class UserDetailService {
     return;
   }
 
+  async deleteUserDetail(userUUID: string): Promise<void> {
+    await this.userDetailRepository.delete({ userUUID: userUUID });
+    return;
+  }
+
   async findOne(userUUID: string): Promise<UserDetail> {
     return await this.userDetailRepository.findOne({ where: { userUUID: userUUID } });
   }
