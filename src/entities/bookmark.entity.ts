@@ -52,8 +52,8 @@ export class GoodShopBookmark extends BaseEntity {
   @Column({ type: 'uuid', nullable: false })
   userUUID: string;
 
-  @Column({ type: 'int', nullable: false })
-  goodShopID: number;
+  @Column({ type: 'uuid', nullable: false })
+  goodShopID: string;
 
   @CreateDateColumn()
   created_at: Date;

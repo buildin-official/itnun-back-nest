@@ -20,7 +20,8 @@ export class RecruitBookmarkDto {
 
 export class GoodShopBookmarkDto {
   @IsNumber()
-  goodShopID: number;
+  @IsUUID()
+  goodShopID: string;
 }
 
 export class BookmarkRemoveDto {

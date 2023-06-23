@@ -63,7 +63,7 @@ export class BookmarkService {
   async getUserGoodShopBookmark(userUUID: string): Promise<GoodShopBookmark[]> {
     return await this.goodShopBookmarkRepository.find({ where: { userUUID: userUUID } });
   }
-  async updateGoodShopBookmark(userUUID: string, goodShopID: number): Promise<void> {
+  async updateGoodShopBookmark(userUUID: string, goodShopID: string): Promise<void> {
     const newGoodShopBookmark = new GoodShopBookmark();
     newGoodShopBookmark.userUUID = userUUID;
     newGoodShopBookmark.goodShopID = goodShopID;
