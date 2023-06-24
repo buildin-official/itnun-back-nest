@@ -12,6 +12,10 @@ export class PolicyDetailSearchDto {
   @Length(1, 50)
   searchKeyword: string;
   @IsOptional()
+  @IsString()
+  @Length(14, 14)
+  policyID: string;
+  @IsOptional()
   @IsIn(policyTypeCodeList, { each: true })
   policyTypeCode: string[];
   @IsOptional()
