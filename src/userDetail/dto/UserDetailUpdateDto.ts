@@ -7,7 +7,6 @@ import {
   preferentialCodeList,
   educationCodeList,
 } from '@/lib/constants/worknetConstants';
-import { AllIsInArray } from '@/lib/decorator/AllIsInArray';
 
 export class UserDetailUpdateReqDto {
   // birthDate YYYYMMDD
@@ -36,14 +35,14 @@ export class UserDetailUpdateReqDto {
   education: string;
 
   @IsOptional()
-  @AllIsInArray(majorCodeList)
+  @IsIn(majorCodeList, { each: true })
   major: string;
 
   @IsOptional()
-  @AllIsInArray(computerSkillCodeList)
+  @IsIn(computerSkillCodeList, { each: true })
   computerSkill: string[];
 
   @IsOptional()
-  @AllIsInArray(preferentialCodeList)
+  @IsIn(preferentialCodeList, { each: true })
   preferential: string[];
 }

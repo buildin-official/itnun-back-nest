@@ -1,6 +1,4 @@
-import { IsNumber, IsOptional, IsString, Length, Max, Min } from 'class-validator';
-
-import { AllIsInArray } from '@/lib/decorator/AllIsInArray';
+import { IsIn, IsNumber, IsOptional, IsString, Length, Max, Min } from 'class-validator';
 
 import { policyLocationCodeList, policyTypeCodeList } from '../../lib/constants/policyConstant';
 
@@ -14,9 +12,9 @@ export class PolicyDetailSearchDto {
   @Length(1, 50)
   searchKeyword: string;
   @IsOptional()
-  @AllIsInArray(policyTypeCodeList)
+  @IsIn(policyTypeCodeList, { each: true })
   policyTypeCode: string[];
   @IsOptional()
-  @AllIsInArray(policyLocationCodeList)
+  @IsIn(policyLocationCodeList, { each: true })
   policyLocationCode: string[];
 }
