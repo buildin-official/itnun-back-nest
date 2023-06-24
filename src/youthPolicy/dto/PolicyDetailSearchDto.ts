@@ -1,6 +1,6 @@
 import { IsIn, IsNumber, IsOptional, IsString, Length, Max, Min } from 'class-validator';
 
-import { policyLocationCodeList, policyTypeCodeList } from '../../lib/constants/policyConstant';
+import { youthLocationCodeList, policyTypeCodeList } from '../../lib/constants/youthConstant';
 
 export class PolicyDetailSearchDto {
   @IsNumber()
@@ -15,6 +15,11 @@ export class PolicyDetailSearchDto {
   @IsIn(policyTypeCodeList, { each: true })
   policyTypeCode: string[];
   @IsOptional()
-  @IsIn(policyLocationCodeList, { each: true })
+  @IsIn(youthLocationCodeList, { each: true })
   policyLocationCode: string[];
+}
+export class PolicyIDSearchDto {
+  @IsString()
+  @Length(14, 14)
+  policyID: string;
 }

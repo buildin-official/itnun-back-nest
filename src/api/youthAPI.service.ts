@@ -15,6 +15,7 @@ export class YouthAPIService {
     openApiVlak: string;
     display: number;
     pageIndex: number;
+    srchPolicyId?: string;
     query?: string;
     bizTycdSel?: string[];
     srchPolyBizSecd?: string[];
@@ -63,6 +64,8 @@ export class YouthAPIService {
     openApiVlak: string;
     display: number;
     pageIndex: number;
+    pageType: number;
+    srchSpcId?: string;
     srchSpnm?: string;
     srchAreaCpvn?: string;
     srchAreaSggn?: string;
@@ -75,7 +78,6 @@ export class YouthAPIService {
         return stringify(params, { arrayFormat: 'comma' });
       },
     });
-
     const $ = load((await apiResponse).data, {
       xml: true,
     });

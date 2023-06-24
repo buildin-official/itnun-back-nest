@@ -15,8 +15,8 @@ export class PolicyBookmark extends BaseEntity {
   created_at: Date;
 }
 
-@Entity({ name: 'place_bookmark' })
-export class PlaceBookmark extends BaseEntity {
+@Entity({ name: 'space_bookmark' })
+export class SpaceBookmark extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   bookmarkID: string;
 
@@ -24,7 +24,7 @@ export class PlaceBookmark extends BaseEntity {
   userUUID: string;
 
   @Column({ type: 'varchar', length: 12, nullable: false })
-  placeID: string;
+  spaceID: string;
 
   @CreateDateColumn()
   created_at: Date;

@@ -31,6 +31,15 @@ export class YouthPolicyService {
     });
     return result;
   }
+  async IDsearch(policyID: string): Promise<PolicyResultDto[]> {
+    const result = await this.youthAPI.queryPolicyAPI({
+      openApiVlak: setting.youthAPI.apiKey,
+      display: 1,
+      pageIndex: 1,
+      srchPolicyId: policyID,
+    });
+    return result;
+  }
   async recommend(): Promise<PolicyResultDto[]> {
     const result = await this.youthAPI.queryPolicyAPI({
       openApiVlak: setting.youthAPI.apiKey,

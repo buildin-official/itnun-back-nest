@@ -6,10 +6,10 @@ export class PolicyBookmarkDto {
   policyID: string;
 }
 
-export class PlaceBookmarkDto {
+export class SpaceBookmarkDto {
   @IsString()
   @Length(12, 12)
-  placeID: string;
+  spaceID: string;
 }
 
 export class RecruitBookmarkDto {

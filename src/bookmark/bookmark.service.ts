@@ -2,14 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { GoodShopBookmark, PlaceBookmark, PolicyBookmark, RecruitBookmark } from '@/entities/bookmark.entity';
+import { GoodShopBookmark, SpaceBookmark, PolicyBookmark, RecruitBookmark } from '@/entities/bookmark.entity';
 
 @Injectable()
 export class BookmarkService {
   constructor(
     @InjectRepository(PolicyBookmark) private policyBookmarkRepository: Repository<PolicyBookmark>,
-    @InjectRepository(PlaceBookmark) private placeBookmarkRepository: Repository<PlaceBookmark>,
     @InjectRepository(RecruitBookmark) private recruitBookmarkRepository: Repository<RecruitBookmark>,
+    @InjectRepository(SpaceBookmark) private placeBookmarkRepository: Repository<SpaceBookmark>,
     @InjectRepository(GoodShopBookmark) private goodShopBookmarkRepository: Repository<GoodShopBookmark>,
   ) {
     this.policyBookmarkRepository = policyBookmarkRepository;
@@ -30,13 +30,13 @@ export class BookmarkService {
     return;
   }
 
-  async getUserPlaceBookmark(userUUID: string): Promise<PlaceBookmark[]> {
+  async getUserPlaceBookmark(userUUID: string): Promise<SpaceBookmark[]> {
     return await this.placeBookmarkRepository.find({ where: { userUUID: userUUID } });
   }
   async updatePlaceBookmark(userUUID: string, placeID: string): Promise<void> {
-    const newPlaceBookmark = new PlaceBookmark();
+    const newPlaceBookmark = new SpaceBookmark();
     newPlaceBookmark.userUUID = userUUID;
-    newPlaceBookmark.placeID = placeID;
+    newPlaceBookmark.spaceID = placeID;
     await this.placeBookmarkRepository.save(newPlaceBookmark);
     return;
   }
