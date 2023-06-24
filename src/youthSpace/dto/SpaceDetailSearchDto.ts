@@ -9,10 +9,6 @@ export class SpaceDetailSearchDto {
   pageIndex: number;
   @IsOptional()
   @IsString()
-  @Length(1, 14)
-  spaceID: string;
-  @IsOptional()
-  @IsString()
   @Length(1, 50)
   searchKeyword: string;
   @IsOptional()
@@ -21,4 +17,9 @@ export class SpaceDetailSearchDto {
   @IsOptional()
   @IsIn(spaceLocationCodeList)
   spaceCityCode: string;
+}
+export class SpaceIDSearchDto {
+  @IsString()
+  @Length(12, 12)
+  spaceID: string;
 }
