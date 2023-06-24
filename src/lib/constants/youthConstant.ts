@@ -1285,3 +1285,10 @@ export const youthToWorknetConversion = [
     Youth: '003002017',
   },
 ];
+
+export function convertYouthtoWorknetCode(youthCode: string): string {
+  const result = youthToWorknetConversion.find((item) => item.Youth === youthCode);
+  if (result) {
+    return result.Worknet;
+  }
+}
