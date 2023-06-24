@@ -18,3 +18,8 @@ export class SpaceDetailSearchDto {
   @IsIn(spaceLocationCodeList)
   spaceCityCode: string;
 }
+export class SpaceIDSearchDto {
+  @IsString()
+  @Length(12, 12)
+  spaceID: string;
+}
