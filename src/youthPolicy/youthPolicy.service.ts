@@ -1,3 +1,5 @@
+import { randomInt } from 'crypto';
+
 import { Injectable } from '@nestjs/common';
 
 import { YouthAPIService } from '@/api/youthAPI.service';
@@ -26,6 +28,15 @@ export class YouthPolicyService {
       query: detailSearchData.searchKeyword,
       bizTycdSel: detailSearchData.policyTypeCode,
       srchPolyBizSecd: detailSearchData.policyLocationCode,
+    });
+    return result;
+  }
+  async recommend(): Promise<PolicyResultDto[]> {
+    const result = await this.youthAPI.queryPolicyAPI({
+      openApiVlak: setting.youthAPI.apiKey,
+      display: 4,
+      pageIndex: randomInt(1, 40),
+      srchPolyBizSecd: ['003001'],
     });
     return result;
   }

@@ -24,4 +24,9 @@ export class YouthPolicyController {
     const result = await this.youthPolicy.detailSearch(detailSearchData);
     return Object.assign(instanceToPlain(result));
   }
+  @Get('/recommend')
+  async policyRecommend(): Promise<string> {
+    const result = await this.youthPolicy.recommend();
+    return Object.assign(instanceToPlain(result));
+  }
 }

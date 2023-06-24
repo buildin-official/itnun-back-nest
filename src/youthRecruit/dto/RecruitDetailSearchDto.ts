@@ -11,7 +11,6 @@ import {
   workConvCodeList,
   workTypeCodeList,
 } from '@/lib/constants/worknetConstants';
-import { AllIsInArray } from '@/lib/decorator/AllIsInArray';
 
 export class RecruitDetailSearchDto {
   @IsNumber()
@@ -40,7 +39,7 @@ export class RecruitDetailSearchDto {
   maxPay?: number;
 
   @IsOptional()
-  @AllIsInArray(localCodeList)
+  @IsIn(localCodeList, { each: true })
   region?: string[];
 
   @IsOptional()
@@ -68,21 +67,21 @@ export class RecruitDetailSearchDto {
 
   @IsOptional()
   @ArrayMaxSize(4)
-  @AllIsInArray(workTypeCodeList)
+  @IsIn(workTypeCodeList, { each: true })
   workType?: Array<'1' | '2' | '3' | '9'>;
 
   @IsOptional()
   @ArrayMaxSize(8)
-  @AllIsInArray(workConvCodeList)
+  @IsIn(workConvCodeList, { each: true })
   workConv?: Array<'01' | '02' | '04' | '11' | '12' | '13' | '06' | '09'>;
 
   @IsOptional()
   @ArrayMaxSize(5)
-  @AllIsInArray(computerSkillCodeList)
+  @IsIn(computerSkillCodeList, { each: true })
   computerSkill?: Array<'1' | '2' | '4' | '6' | '9'>;
 
   @IsOptional()
   @ArrayMaxSize(7)
-  @AllIsInArray(preferentialCodeList)
+  @IsIn(preferentialCodeList, { each: true })
   preferential?: Array<'05' | '07' | '08' | '09' | '10' | '14' | 'S' | 'B'>;
 }
