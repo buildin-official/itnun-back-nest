@@ -9,6 +9,10 @@ export class SpaceDetailSearchDto {
   pageIndex: number;
   @IsOptional()
   @IsString()
+  @Length(1, 14)
+  spaceID: string;
+  @IsOptional()
+  @IsString()
   @Length(1, 50)
   searchKeyword: string;
   @IsOptional()

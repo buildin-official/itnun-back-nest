@@ -5,7 +5,7 @@ import { BookmarkService } from './bookmark.service';
 import {
   BookmarkRemoveDto,
   GoodShopBookmarkDto,
-  PlaceBookmarkDto,
+  SpaceBookmarkDto,
   PolicyBookmarkDto,
   RecuritBookmarkDto,
 } from './dto/BookmarkUpdateDto';
@@ -36,8 +36,8 @@ export class BookmarkController {
     return Object.assign(result);
   }
   @Post('/place')
-  async updatePlaceBookmark(@Req() req: Request, @Body() place: PlaceBookmarkDto): Promise<string> {
-    await this.bookmark.updatePlaceBookmark(req.userId, place.placeID);
+  async updatePlaceBookmark(@Req() req: Request, @Body() place: SpaceBookmarkDto): Promise<string> {
+    await this.bookmark.updatePlaceBookmark(req.userId, place.spaceID);
     return 'Update Bookmark Success!';
   }
   @Delete('/place')

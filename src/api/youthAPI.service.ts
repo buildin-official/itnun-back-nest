@@ -64,6 +64,7 @@ export class YouthAPIService {
     openApiVlak: string;
     display: number;
     pageIndex: number;
+    srchSpcId?: string;
     srchSpnm?: string;
     srchAreaCpvn?: string;
     srchAreaSggn?: string;

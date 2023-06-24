@@ -23,6 +23,7 @@ export class YouthSpaceService {
       openApiVlak: setting.youthAPI.apiKey,
       display: 10,
       pageIndex: detailSearchData.pageIndex,
+      srchSpcId: detailSearchData.spaceID,
       srchSpnm: detailSearchData.searchKeyword,
       srchAreaCpvn: detailSearchData.spaceStateCode,
       srchAreaSggn: detailSearchData.spaceCityCode,
