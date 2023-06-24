@@ -31,6 +31,7 @@ export class RecruitInfoAPIService {
     authKey: string,
     count: number,
     page: number,
+    callType: 'L' | 'D' = 'L',
     params?: {
       region?: Array<string>;
       occupation?: Array<string>;
@@ -67,7 +68,7 @@ export class RecruitInfoAPIService {
     const response = await this._apiClient.get(
       `/opi/opi/opia/wantedApi.do?${paramMaker({
         authKey,
-        callTp: 'L',
+        callTp: callType,
         returnType: 'xml',
         startPage: page,
         display: count,
