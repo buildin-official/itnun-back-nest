@@ -31,7 +31,6 @@ export class RecruitInfoAPIService {
     authKey: string,
     count: number,
     page: number,
-    callType: 'L' | 'D' = 'L',
     params?: {
       region?: Array<string>;
       occupation?: Array<string>;
@@ -64,6 +63,7 @@ export class RecruitInfoAPIService {
       pfPreferential?: Array<'05' | '07' | '08' | '09' | '10' | '14' | 'S' | 'B'>;
       workHrCd?: Array<'1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '99'>;
     },
+    callType: 'L' | 'D' = 'L',
   ) {
     const response = await this._apiClient.get(
       `/opi/opi/opia/wantedApi.do?${paramMaker({
