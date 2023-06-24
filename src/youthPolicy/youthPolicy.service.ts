@@ -25,6 +25,7 @@ export class YouthPolicyService {
       openApiVlak: setting.youthAPI.apiKey,
       display: 10,
       pageIndex: detailSearchData.pageIndex,
+      srchPolicyId: detailSearchData.policyID,
       query: detailSearchData.searchKeyword,
       bizTycdSel: detailSearchData.policyTypeCode,
       srchPolyBizSecd: detailSearchData.policyLocationCode,

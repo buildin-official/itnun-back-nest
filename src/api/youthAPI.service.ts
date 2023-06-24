@@ -15,6 +15,7 @@ export class YouthAPIService {
     openApiVlak: string;
     display: number;
     pageIndex: number;
+    srchPolicyId?: string;
     query?: string;
     bizTycdSel?: string[];
     srchPolyBizSecd?: string[];
