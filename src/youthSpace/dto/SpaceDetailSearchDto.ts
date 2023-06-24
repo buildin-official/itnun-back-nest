@@ -1,6 +1,6 @@
 import { IsIn, IsNumber, IsOptional, IsString, Length, Max, Min } from 'class-validator';
 
-import { spaceLocationCodeList } from './CodeConstant';
+import { youthLocationCodeList } from '@/lib/constants/youthConstant';
 
 export class SpaceDetailSearchDto {
   @IsNumber()
@@ -12,10 +12,10 @@ export class SpaceDetailSearchDto {
   @Length(1, 50)
   searchKeyword: string;
   @IsOptional()
-  @IsIn(spaceLocationCodeList)
+  @IsIn(youthLocationCodeList)
   spaceStateCode: string;
   @IsOptional()
-  @IsIn(spaceLocationCodeList)
+  @IsIn(youthLocationCodeList)
   spaceCityCode: string;
 }
 export class SpaceIDSearchDto {
