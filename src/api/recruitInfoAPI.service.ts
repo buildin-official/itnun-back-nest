@@ -184,15 +184,21 @@ export class RecruitInfoAPIService {
         disableCvntl: wantedInfo.find('disableCvntl').text(),
         //! 아래 3개 뭔가 배열로 줘야 할 것 같은데 테스트해보고 알려주세요
         //TODO 그렇게 하쇼
-        attachFileInfo: {
-          attachFileUrl: wantedInfo.find('attachFileInfo').find('attachFileUrl').text(),
-        },
-        corpAttachList: {
-          attachFileUrl: wantedInfo.find('corpAttachList').find('attachFileUrl').text(),
-        },
-        keywordList: {
-          srchKeywordNm: wantedInfo.find('keywordList').find('srchKeywordNm').text(),
-        },
+        attachFileInfo: wantedInfo
+          .find('attachFileInfo')
+          .children()
+          .toArray()
+          .map((child) => child.children.toString()),
+        corpAttachList: wantedInfo
+          .find('corpAttachList')
+          .children()
+          .toArray()
+          .map((child) => child.children.toString()),
+        keywordList: wantedInfo
+          .find('keywordList')
+          .children()
+          .toArray()
+          .map((child) => child.children.toString()),
         dtlRecrContUrl: wantedInfo.find('dtlRecrContUrl').text(),
         jobsCd: wantedInfo.find('jobsCd').text(),
         minEdubgIcd: wantedInfo.find('minEdubgIcd').text(),
