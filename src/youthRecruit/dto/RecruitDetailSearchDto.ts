@@ -85,3 +85,9 @@ export class RecruitDetailSearchDto {
   @IsIn(preferentialCodeList, { each: true })
   preferential?: Array<'05' | '07' | '08' | '09' | '10' | '14' | 'S' | 'B'>;
 }
+
+export class RecruitIDSearchDto {
+  @IsString()
+  @Length(16, 16)
+  recruitID: string;
+}

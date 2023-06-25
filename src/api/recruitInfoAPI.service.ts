@@ -3,7 +3,7 @@ import axios, { AxiosInstance } from 'axios';
 import { load } from 'cheerio';
 
 import { setting } from '@/setting';
-import { RecruitResultDto } from '@/youthRecruit/dto/RecruitResultDto';
+import { RecruitDetailDto, RecruitResultDto } from '@/youthRecruit/dto/RecruitResultDto';
 
 function paramMaker(params: Record<string, unknown>) {
   const result: string[] = [];
@@ -118,12 +118,12 @@ export class RecruitInfoAPIService {
     return result;
   }
 
-  public async queryDetail(authKey: string, wantedAuthNo: string) {
+  public async queryDetail(authKey: string, wantedAuthNo: string): Promise<RecruitDetailDto> {
     const response = await this._apiClient.get(
       `/opi/opi/opia/wantedApi.do?${paramMaker({
         authKey,
         wantedAuthNo,
-        callTp: 'L',
+        callTp: 'D',
         returnType: 'xml',
         infoSvc: 'VALIDATION',
       })}`,
@@ -139,15 +139,14 @@ export class RecruitInfoAPIService {
     const corpInfo = wantedData.find('corpInfo');
     const wantedInfo = wantedData.find('wantedInfo');
     const empchargeInfo = wantedData.find('empchargeInfo');
-
-    return {
+    const result: RecruitDetailDto = {
       wantedAuthNo: wantedData.find('wantedAuthNo').text(),
       corpInfo: {
         corpNm: corpInfo.find('corpNm').text(),
         reperNm: corpInfo.find('reperNm').text(),
-        totPsncnt: Number(corpInfo.find('totPsncnt').text()),
-        capitalAmt: Number(corpInfo.find('capitalAmt').text()),
-        yrSalesAmt: Number(corpInfo.find('yrSalesAmt').text()),
+        totPsncnt: corpInfo.find('totPsncnt').text(),
+        capitalAmt: corpInfo.find('capitalAmt').text(),
+        yrSalesAmt: corpInfo.find('yrSalesAmt').text(),
         indTpCdNm: corpInfo.find('indTpCdNm').text(),
         busiCont: corpInfo.find('busiCont').text(),
         corpAddr: corpInfo.find('corpAddr').text(),
@@ -184,6 +183,7 @@ export class RecruitInfoAPIService {
         etcWelfare: wantedInfo.find('etcWelfare').text(),
         disableCvntl: wantedInfo.find('disableCvntl').text(),
         //! 아래 3개 뭔가 배열로 줘야 할 것 같은데 테스트해보고 알려주세요
+        //TODO 그렇게 하쇼
         attachFileInfo: {
           attachFileUrl: wantedInfo.find('attachFileInfo').find('attachFileUrl').text(),
         },
@@ -213,5 +213,6 @@ export class RecruitInfoAPIService {
         chargerFaxNo: empchargeInfo.find('chargerFaxNo').text(),
       },
     };
+    return result;
   }
 }
