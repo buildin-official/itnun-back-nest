@@ -1292,3 +1292,10 @@ export function convertYouthtoWorknetCode(youthCode: string): string {
     return result.Worknet;
   }
 }
+
+export function convertWorknetToYouthCode(worknetCode: string): string {
+  const result = youthToWorknetConversion.find((item) => item.Worknet === worknetCode);
+  if (result) {
+    return result.Youth;
+  }
+}

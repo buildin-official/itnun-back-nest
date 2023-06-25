@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Req } from '@nestjs/common';
 import { instanceToPlain } from 'class-transformer';
+import { Request } from 'express';
 
 import { SpaceDetailSearchDto, SpaceIDSearchDto } from './dto/SpaceDetailSearchDto';
 import { YouthSpaceService } from './youthSpace.service';
@@ -26,6 +27,11 @@ export class YouthSpaceController {
   @Post('/idsearch')
   async policyIDsearch(@Body() space: SpaceIDSearchDto): Promise<string> {
     const result = await this.youthSpace.IDsearch(space.spaceID);
+    return Object.assign(instanceToPlain(result));
+  }
+  @Get('/recommend')
+  async policyRecommend(@Req() req: Request): Promise<string> {
+    const result = await this.youthSpace.recommend(req.userId);
     return Object.assign(instanceToPlain(result));
   }
 }
