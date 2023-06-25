@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Req } from '@nestjs/common';
 import { instanceToPlain } from 'class-transformer';
+import { Request } from 'express';
 
 import { RecruitDetailSearchDto, RecruitIDSearchDto } from './dto/RecruitDetailSearchDto';
 import { YouthRecruitService } from './youthRecruit.service';
@@ -31,6 +32,11 @@ export class YouthRecruitController {
   @Post('/idsearch')
   async recruitIDsearch(@Body() recruit: RecruitIDSearchDto): Promise<string> {
     const result = await this.youthRecruit.IDsearch(recruit.recruitID);
+    return Object.assign(instanceToPlain(result));
+  }
+  @Get('/recommend')
+  async recruitRecommend(@Req() req: Request): Promise<string> {
+    const result = await this.youthRecruit.recommend(req.userId);
     return Object.assign(instanceToPlain(result));
   }
 }

@@ -1,3 +1,5 @@
+import { randomInt } from 'crypto';
+
 import { Injectable } from '@nestjs/common';
 
 import { RecruitInfoAPIService } from '@/api/recruitInfoAPI.service';
@@ -37,6 +39,10 @@ export class YouthRecruitService {
   }
   async IDsearch(recruitID: string): Promise<RecruitDetailDto> {
     const result = this.recruitAPI.queryDetail(setting.worknetAPI.apiKey, recruitID);
+    return result;
+  }
+  async recommend(userID: string): Promise<RecruitResultDto[]> {
+    const result = this.recruitAPI.queryWithPagination(setting.worknetAPI.apiKey, 4, randomInt(1, 40), {});
     return result;
   }
 }
