@@ -70,8 +70,6 @@ export interface RecruitDetailDto {
     retirepay: string;
     etcWelfare: string;
     disableCvntl: string;
-    //! 아래 3개 뭔가 배열로 줘야 할 것 같은데 테스트해보고 알려주세요
-    //TODO 그렇게 하쇼
     attachFileInfo: string[];
     corpAttachList: string[];
     keywordList: string[];
