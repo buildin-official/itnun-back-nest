@@ -4,7 +4,7 @@ import { RecruitInfoAPIService } from '@/api/recruitInfoAPI.service';
 import { setting } from '@/setting';
 
 import { RecruitDetailSearchDto } from './dto/RecruitDetailSearchDto';
-import { RecruitResultDto } from './dto/RecruitResultDto';
+import { RecruitDetailDto, RecruitResultDto } from './dto/RecruitResultDto';
 
 @Injectable()
 export class YouthRecruitService {
@@ -33,6 +33,10 @@ export class YouthRecruitService {
       comPreferential: detailSearchData.computerSkill,
       pfPreferential: detailSearchData.preferential,
     });
+    return result;
+  }
+  async IDsearch(recruitID: string): Promise<RecruitDetailDto> {
+    const result = this.recruitAPI.queryDetail(setting.worknetAPI.apiKey, recruitID);
     return result;
   }
 }

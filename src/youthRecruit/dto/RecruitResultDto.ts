@@ -26,3 +26,70 @@ export interface RecruitResultDto {
   modifyDate: number;
   prefCode: string;
 }
+
+export interface RecruitDetailDto {
+  wantedAuthNo: string;
+  corpInfo: {
+    corpNm: string;
+    reperNm: string;
+    totPsncnt: string;
+    capitalAmt: string;
+    yrSalesAmt: string;
+    indTpCdNm: string;
+    busiCont: string;
+    corpAddr: string;
+    homePg: string;
+    busiSize: string;
+  };
+  wantedInfo: {
+    jobsNm: string;
+    wantedTitle: string;
+    relJobsNm: string;
+    jobCont: string;
+    receiptCloseDt: string;
+    empTpNm: string;
+    collectPsncnt: string;
+    salTpNm: string;
+    enterTpNm: string;
+    eduNm: string;
+    forLang: string;
+    major: string;
+    certificate: string;
+    mltsvcExcHope: string;
+    compAbl: string;
+    pfCond: string;
+    etcPfCond: string;
+    selMthd: string;
+    rcptMthd: string;
+    submitDoc: string;
+    etcHopeCont: string;
+    workRegion: string;
+    nearLine: string;
+    workdayWorkhrCont: string;
+    fourIns: string;
+    retirepay: string;
+    etcWelfare: string;
+    disableCvntl: string;
+    attachFileInfo: string[];
+    corpAttachList: string[];
+    keywordList: string[];
+    dtlRecrContUrl: string;
+    jobsCd: string;
+    minEdubgIcd: string;
+    maxEdubgIcd: string;
+    regionCd: string;
+    empTpCd: string;
+    enterTpCd: string;
+    salTpCd: string;
+    staAreaRegionCd: string;
+    lineCd: string;
+    staNmCd: string;
+    exitNoCd: string;
+    walkDistCd: string;
+  };
+  empchargeInfo: {
+    empChargerDpt: string;
+    contactTelno: string;
+    chargerFaxNo: string;
+  };
+}
