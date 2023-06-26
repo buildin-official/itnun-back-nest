@@ -29,6 +29,9 @@ export class UserDetail extends BaseEntity {
   @Column({ type: 'simple-array', nullable: true })
   preferential: string[];
 
+  @Column({ type: 'boolean', nullable: false, default: false })
+  notification: boolean;
+
   @CreateDateColumn()
   created_at: Date;
 

@@ -23,6 +23,7 @@ export class UserDetailService {
     newUserDetail.major = userDetailReq.major == undefined ? null : userDetailReq.major;
     newUserDetail.computerSkill = userDetailReq.computerSkill == undefined ? null : userDetailReq.computerSkill;
     newUserDetail.preferential = userDetailReq.preferential == undefined ? null : userDetailReq.preferential;
+    newUserDetail.notification = userDetailReq.notification;
 
     await this.userDetailRepository.save(newUserDetail);
     return;
