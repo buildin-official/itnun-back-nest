@@ -37,7 +37,7 @@ export class RecruitInfoAPIService {
       salTp?: 'D' | 'H' | 'M' | 'Y';
       minPay?: number;
       maxPay?: number;
-      education?: string;
+      education?: string | string[];
       career?: 'N' | 'E' | 'Z';
       minCareerMonth?: number;
       maxCareerMonth?: number;
@@ -57,13 +57,15 @@ export class RecruitInfoAPIService {
       keyword?: Array<string>;
       empTpGb?: '1' | '2';
       sortOrderBy?: 'DESC' | 'ASC';
-      major?: string;
+      major?: string | string[];
       foreignLanguage?: Array<string>;
       comPreferential?: Array<'1' | '2' | '4' | '6' | '9'>;
       pfPreferential?: Array<'05' | '07' | '08' | '09' | '10' | '14' | 'S' | 'B'>;
       workHrCd?: Array<'1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '99'>;
     },
   ) {
+    if (Array.isArray(params?.education)) params.education = params.education.join('|');
+    if (Array.isArray(params?.major)) params.major = params.major.join('|');
     const response = await this._apiClient.get(
       `/opi/opi/opia/wantedApi.do?${paramMaker({
         authKey,
