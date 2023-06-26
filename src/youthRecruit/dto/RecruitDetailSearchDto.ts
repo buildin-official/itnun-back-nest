@@ -58,12 +58,12 @@ export class RecruitDetailSearchDto {
   maxCareerMonth?: number;
 
   @IsOptional()
-  @IsIn(educationCodeList)
-  education?: string;
+  @IsIn(educationCodeList, { each: true })
+  education?: string[];
 
   @IsOptional()
-  @IsIn(majorCodeList)
-  major?: string;
+  @IsIn(majorCodeList, { each: true })
+  major?: string[];
 
   @IsOptional()
   @ArrayMaxSize(4)
