@@ -1,4 +1,4 @@
-import { IsIn, IsOptional, IsString, Matches, Max, Min } from 'class-validator';
+import { IsBoolean, IsIn, IsOptional, IsString, Matches, Max, Min } from 'class-validator';
 
 import {
   localCodeList,
@@ -45,4 +45,7 @@ export class UserDetailUpdateReqDto {
   @IsOptional()
   @IsIn(preferentialCodeList, { each: true })
   preferential: string[];
+
+  @IsBoolean()
+  notification: boolean;
 }
