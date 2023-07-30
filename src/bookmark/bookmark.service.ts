@@ -2,14 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { GoodShopBookmark, SpaceBookmark, PolicyBookmark, RecuritBookmark } from '@/entities/bookmark.entity';
+import { GoodShopBookmark, SpaceBookmark, PolicyBookmark, RecruitBookmark } from '@/entities/bookmark.entity';
 
 @Injectable()
 export class BookmarkService {
   constructor(
     @InjectRepository(PolicyBookmark) private policyBookmarkRepository: Repository<PolicyBookmark>,
+    @InjectRepository(RecruitBookmark) private recruitBookmarkRepository: Repository<RecruitBookmark>,
     @InjectRepository(SpaceBookmark) private placeBookmarkRepository: Repository<SpaceBookmark>,
-    @InjectRepository(RecuritBookmark) private recuritBookmarkRepository: Repository<RecuritBookmark>,
     @InjectRepository(GoodShopBookmark) private goodShopBookmarkRepository: Repository<GoodShopBookmark>,
   ) {
     this.policyBookmarkRepository = policyBookmarkRepository;
@@ -45,25 +45,25 @@ export class BookmarkService {
     return;
   }
 
-  async getUserRecuritBookmark(userUUID: string): Promise<RecuritBookmark[]> {
-    return await this.recuritBookmarkRepository.find({ where: { userUUID: userUUID } });
+  async getUserRecruitBookmark(userUUID: string): Promise<RecruitBookmark[]> {
+    return await this.recruitBookmarkRepository.find({ where: { userUUID: userUUID } });
   }
-  async updateRecuritBookmark(userUUID: string, recuritID: string): Promise<void> {
-    const newRecuritBookmark = new RecuritBookmark();
-    newRecuritBookmark.userUUID = userUUID;
-    newRecuritBookmark.recuritID = recuritID;
-    await this.recuritBookmarkRepository.save(newRecuritBookmark);
+  async updateRecruitBookmark(userUUID: string, recruitID: string): Promise<void> {
+    const newRecruitBookmark = new RecruitBookmark();
+    newRecruitBookmark.userUUID = userUUID;
+    newRecruitBookmark.recruitID = recruitID;
+    await this.recruitBookmarkRepository.save(newRecruitBookmark);
     return;
   }
-  async deleteRecuritBookmark(userUUID: string, bookmarkUUID: string): Promise<void> {
-    await this.recuritBookmarkRepository.delete({ userUUID: userUUID, bookmarkID: bookmarkUUID });
+  async deleteRecruitBookmark(userUUID: string, bookmarkUUID: string): Promise<void> {
+    await this.recruitBookmarkRepository.delete({ userUUID: userUUID, bookmarkID: bookmarkUUID });
     return;
   }
 
   async getUserGoodShopBookmark(userUUID: string): Promise<GoodShopBookmark[]> {
     return await this.goodShopBookmarkRepository.find({ where: { userUUID: userUUID } });
   }
-  async updateGoodShopBookmark(userUUID: string, goodShopID: number): Promise<void> {
+  async updateGoodShopBookmark(userUUID: string, goodShopID: string): Promise<void> {
     const newGoodShopBookmark = new GoodShopBookmark();
     newGoodShopBookmark.userUUID = userUUID;
     newGoodShopBookmark.goodShopID = goodShopID;

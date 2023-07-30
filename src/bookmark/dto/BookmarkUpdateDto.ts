@@ -12,15 +12,16 @@ export class SpaceBookmarkDto {
   spaceID: string;
 }
 
-export class RecuritBookmarkDto {
+export class RecruitBookmarkDto {
   @IsString()
   @Length(16, 16)
-  recuritID: string;
+  recruitID: string;
 }
 
 export class GoodShopBookmarkDto {
-  @IsNumber()
-  goodShopID: number;
+  @IsString()
+  @IsUUID()
+  goodShopID: string;
 }
 
 export class BookmarkRemoveDto {

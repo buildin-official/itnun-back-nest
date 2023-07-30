@@ -7,7 +7,7 @@ import {
   GoodShopBookmarkDto,
   SpaceBookmarkDto,
   PolicyBookmarkDto,
-  RecuritBookmarkDto,
+  RecruitBookmarkDto,
 } from './dto/BookmarkUpdateDto';
 
 @Controller('bookmark')
@@ -46,19 +46,19 @@ export class BookmarkController {
     return 'Delete Bookmark Success!';
   }
 
-  @Get('/recurit')
-  async getRecuritBookmark(@Req() req: Request): Promise<string> {
-    const result = await this.bookmark.getUserRecuritBookmark(req.userId);
+  @Get('/recruit')
+  async getRecruitBookmark(@Req() req: Request): Promise<string> {
+    const result = await this.bookmark.getUserRecruitBookmark(req.userId);
     return Object.assign(result);
   }
-  @Post('/recurit')
-  async updateRecuritBookmark(@Req() req: Request, @Body() recurit: RecuritBookmarkDto): Promise<string> {
-    await this.bookmark.updateRecuritBookmark(req.userId, recurit.recuritID);
+  @Post('/recruit')
+  async updateRecruitBookmark(@Req() req: Request, @Body() recruit: RecruitBookmarkDto): Promise<string> {
+    await this.bookmark.updateRecruitBookmark(req.userId, recruit.recruitID);
     return 'Update Bookmark Success!';
   }
-  @Delete('/recurit')
-  async deleteRecuritBookmark(@Req() req: Request, @Body() bookmark: BookmarkRemoveDto): Promise<string> {
-    await this.bookmark.deleteRecuritBookmark(req.userId, bookmark.bookmarkID);
+  @Delete('/recruit')
+  async deleteRecruitBookmark(@Req() req: Request, @Body() bookmark: BookmarkRemoveDto): Promise<string> {
+    await this.bookmark.deleteRecruitBookmark(req.userId, bookmark.bookmarkID);
     return 'Delete Bookmark Success!';
   }
 

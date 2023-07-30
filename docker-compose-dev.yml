@@ -11,7 +11,7 @@ services:
   itnun-back:
     build: ./
     container_name: itnun-back
-    image: itnun-back
+    image: itnun-back:latest
     ports:
       - ${WAS_PORT}:${WAS_PORT}
     volumes:
@@ -35,6 +35,13 @@ services:
       - ./mariadb/initdb.d:/docker-entrypoint-initdb.d
     environment:
       - TZ
+      - MYSQL_HOST
+      - MYSQL_DATABASE
+      - MYSQL_HOSTNAME
+      - MYSQL_PASSWORD
+      - MYSQL_PORT
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_USER
     restart: always
     networks:
       - back_net
