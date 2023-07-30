@@ -9,7 +9,6 @@ networks:
 
 services:
   itnun-back:
-    build: ./
     container_name: itnun-back
     image: itnun-back:latest
     expose:
