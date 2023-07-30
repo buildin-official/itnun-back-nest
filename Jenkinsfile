@@ -7,7 +7,7 @@ def component = [
 ]
 pipeline {
 	agent any
-  stages {
+	stages {
 		stage("Checkout") {
 			steps {
 				checkout scm
@@ -15,7 +15,7 @@ pipeline {
 		}
 		stage("Build") {
       steps {
-        sh "docker build itnun-back"
+        sh "docker build . --tag itnun-back:latest"
       }
 		}
 	  stage("Tag and Push") {
