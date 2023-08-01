@@ -27,10 +27,10 @@ pipeline {
 								          passwordVariable: 'DOCKER_USER_PASSWORD'
 				]]){
 					sh 'docker login -u $DOCKER_USER_ID -p $DOCKER_USER_PASSWORD'
-					sh 'docker tag itnun-back:latest $DOCKER_USER_ID/itnun-back:latest'
-					sh 'docker push $DOCKER_USER_ID/itnun-back:latest'
-				  sh 'docker tag $DOCKER_USER_ID/itnun-back:latest $DOCKER_USER_ID/itnun-back:$BUILD_NUMBER'
+					sh 'docker tag itnun-back:latest $DOCKER_USER_ID/itnun-back:$BUILD_NUMBER'
 					sh 'docker push $DOCKER_USER_ID/itnun-back:$BUILD_NUMBER'
+					sh 'docker tag $DOCKER_USER_ID/itnun-back:$BUILD_NUMBER $DOCKER_USER_ID/itnun-back:latest'
+					sh 'docker push $DOCKER_USER_ID/itnun-back:latest'
 				}	
 			}
 		}
@@ -43,6 +43,7 @@ pipeline {
 						string(credentialsId: 'buildin-server-port', variable: 'PORT'),
 						sshUserPrivateKey(credentialsId: 'buildin-server', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName'),
 					]) {
+						sshagent(['buildin-server']) {
                 sh '''
 								ssh -o StrictHostKeyChecking=no -p $PORT $userName@$HOST '
 								cd ~/docker-compose/itnun-back-nest
@@ -51,6 +52,7 @@ pipeline {
 								doppler run -- docker compose -f docker-compose-prod.yml up -d
 								'
 								'''
+						}
 					}
 				}
 			}
