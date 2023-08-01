@@ -16,8 +16,8 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+    it('should return "itnun-back-nest"', () => {
+      expect(appController.getHello()).toBe('itnun-back-nest');
     });
   });
 });
