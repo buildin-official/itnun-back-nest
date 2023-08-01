@@ -15,7 +15,7 @@ pipeline {
 		}
 		stage("Build") {
       steps {
-        sh "docker buildx build --platform linux/amd64 --tag itnun-back:latest"
+        sh "docker buildx build --platform linux/amd64 --tag itnun-back:latest ."
 
       }
 		}
@@ -41,26 +41,17 @@ pipeline {
 					withCredentials([
 						string(credentialsId: 'buildin-server-host', variable: 'HOST'),
 						string(credentialsId: 'buildin-server-port', variable: 'PORT'),
-						string(credentialsId: 'itnun-back-doppler-token', variable: 'DOPPLER_TOKEN'),
 						sshUserPrivateKey(credentialsId: 'buildin-server', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName'),
 					]) {
-						def remote = [:]
-						remote.name = 'Remote Server'
-						remote.host = HOST
-						remote.port = PORT as int
-						remote.allowAnyHosts = true
-						remote.user = userName
-						remote.credentialsId = identity
-
-						def commandString = """
-								cd /home/seonwoo0808/docker-compose/itnun-back-nest
+                sh '''
+								ssh -o StrictHostKeyChecking=no -p $PORT $userName@$HOST '
+								cd ~/docker-compose/itnun-back-nest
 								git pull origin main
-								docker pull seonwoo0808/itnun-back:lastest
-								docker-compose up -d
-								doppler run --token $DOPPLER_TOKEN  -- docker compose -f docker-compose-prod.yml up -d
-						"""
-
-						sshCommand remote: remote, command: commandString
+								docker pull implude/itnun-back:latest
+								doppler run -- docker compose -f docker-compose-prod.yml up -d
+								'
+								'''
+            
 					}
 				}
 			}
