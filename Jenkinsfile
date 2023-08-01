@@ -44,13 +44,13 @@ pipeline {
 						string(credentialsId: 'itnun-back-doppler-token', variable: 'DOPPLER_TOKEN'),
 						sshUserPrivateKey(credentialsId: 'buildin-server', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName'),
 					]) {
-						def commandString = '''
-								cd ~/docker-compose/itnun-back-nest
-								git pull origin main
-								docker pull seonwoo0808/itnun-back:lastest
-								docker-compose up -d
-								doppler run --token $DOPPLER_TOKEN  -- docker compose -f docker-compose-prod.yml up -d
-						'''
+						// def commandString = '''
+						// 		cd ~/docker-compose/itnun-back-nest
+						// 		git pull origin main
+						// 		docker pull seonwoo0808/itnun-back:lastest
+						// 		docker-compose up -d
+						// 		doppler run --token $DOPPLER_TOKEN  -- docker compose -f docker-compose-prod.yml up -d
+						// '''
 						// def remote = [:]
 						// remote.name = 'Remote Server'
 						// remote.host = HOST
@@ -60,7 +60,16 @@ pipeline {
 						// remote.credentialsId = identity
 						// sshCommand remote: remote, command: commandString
 						sshagent (credentials: ['buildin-server']) {
-                sh 'ssh -o StrictHostKeyChecking=no -p $PORT $userName@$HOST "$commandString"'
+                sh '''
+								ssh -o StrictHostKeyChecking=no -p $PORT $userName@$HOST '
+								cat > FILE
+								cd ~/docker-compose/itnun-back-nest
+								git pull origin main
+								docker pull seonwoo0808/itnun-back:lastest
+								docker-compose up -d
+								doppler run --token $DOPPLER_TOKEN  -- docker compose -f docker-compose-prod.yml up -d
+								'
+								'''
             }
 					}
 				}
