@@ -51,13 +51,15 @@ pipeline {
 						remote.user = userName
 						remote.credentialsId = identity
 
-						sshCommand remote: remote, command: """
+						def commandString = """
 								cd /home/seonwoo0808/docker-compose/itnun-back-nest
 								git pull origin main
 								docker pull seonwoo0808/itnun-back:lastest
 								docker-compose up -d
 								doppler run --token $DOPPLER_TOKEN  -- docker compose -f docker-compose-prod.yml up -d
 						"""
+
+						sshCommand remote: remote, command: commandString
 					}
 				}
 			}
