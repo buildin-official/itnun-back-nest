@@ -15,7 +15,7 @@ pipeline {
 		}
 		stage("Build") {
       steps {
-        sh "docker buildx build --platform linux/amd64 --tag itnun-back:latest ."
+        sh "docker buildx build --platform linux/amd64 --tag itnun-back:latest"
 
       }
 		}
@@ -42,16 +42,8 @@ pipeline {
 						string(credentialsId: 'buildin-server-host', variable: 'HOST'),
 						string(credentialsId: 'buildin-server-port', variable: 'PORT'),
 						string(credentialsId: 'itnun-back-doppler-token', variable: 'DOPPLER_TOKEN'),
-						sshUserPrivateKey(credentialsId: 'buildin-server', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName'),
+						// sshUserPrivateKey(credentialsId: 'buildin-server', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName'),
 					]) {
-						def remote = [:]
-						remote.name = 'Remote Server'
-						remote.host = HOST
-						remote.port = PORT as int
-						remote.allowAnyHosts = true
-						remote.user = userName
-						remote.credentialsId = identity
-
 						def commandString = '''
 								cd ~/docker-compose/itnun-back-nest
 								git pull origin main
@@ -59,8 +51,17 @@ pipeline {
 								docker-compose up -d
 								doppler run --token $DOPPLER_TOKEN  -- docker compose -f docker-compose-prod.yml up -d
 						'''
-
-						sshCommand remote: remote, command: commandString
+						// def remote = [:]
+						// remote.name = 'Remote Server'
+						// remote.host = HOST
+						// remote.port = PORT as int
+						// remote.allowAnyHosts = true
+						// remote.user = userName
+						// remote.credentialsId = identity
+						// sshCommand remote: remote, command: commandString
+						sshagent (credentials: ['buildin-server']) {
+                sh 'ssh -o StrictHostKeyChecking=no -p $PORT $userName@$HOST "$commandString"'
+            }
 					}
 				}
 			}
