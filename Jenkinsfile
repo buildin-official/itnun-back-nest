@@ -33,38 +33,34 @@ pipeline {
 				}	
 			}
 		}
-		stage("Deploy") {
-      steps {
-				withCredentials([string(credentialsId: 'itnun-back-doppler-token', variable: 'DOPPLER_TOKEN')]) { //set SECRET with the credential content
-					sshPublisher(
-						continueOnError: false, failOnError: true,
-						publishers: [
-							sshPublisherDesc(
-								configName: "buildin-server",
-								verbose: true,
-									transfers: [
-										sshTransfer(
-											remoteDirectory: '~/docker-compose/itnun-back-nest',
-											execCommand: 'git fetch origin main'
-										),
-										sshTransfer(
-											remoteDirectory: '~/docker-compose/itnun-back-nest',
-											execCommand: 'git checkout origin/main -- docker-compose-prod.yml'
-										),
-										sshTransfer(
-											remoteDirectory: '~/docker-compose/itnun-back-nest',
-											execCommand: 'docker pull seonwoo0808/itnun-back:lastest'
-										),
-										sshTransfer(
-											remoteDirectory: '~/docker-compose/itnun-back-nest',
-											execCommand: 'doppler run --token $DOPPLER_TOKEN  -- docker compose -f docker-compose-prod.yml up -d'
-										),
-									]
-							)
-						]
-        	)
-    		}
-      }
-    }
+		stage("SSH-Deploy") {
+			steps {
+				script {
+					// Secret Text 타입의 자격 증명을 불러옵니다.
+					withCredentials([
+						string(credentialsId: 'buildin-server-host', variable: 'HOST'),
+						string(credentialsId: 'buildin-server-port', variable: 'PORT'),
+						string(credentialsId: 'itnun-back-doppler-token', variable: 'DOPPLER_TOKEN'),
+						sshUserPrivateKey(credentialsId: 'sshUser', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName'),
+					]) {
+						def remote = [:]
+						remote.name = 'Remote Server'
+						remote.host = HOST
+						remote.port = PORT as int
+						remote.allowAnyHosts = true
+						remote.user = userName
+						remote.credentialsId = identity
+
+						sshCommand remote: remote, command: """
+								cd /home/seonwoo0808/docker-compose/itnun-back-nest
+								git pull origin main
+								docker pull seonwoo0808/itnun-back:lastest
+								docker-compose up -d
+								doppler run --token $DOPPLER_TOKEN  -- docker compose -f docker-compose-prod.yml up -d
+						"""
+					}
+				}
+			}
+		}
   }
 }
