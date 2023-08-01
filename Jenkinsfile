@@ -15,7 +15,7 @@ pipeline {
 		}
 		stage("Build") {
       steps {
-        sh "docker buildx build --platform linux/amd64 --tag itnun-back:latest"
+        sh "docker buildx build --platform linux/amd64 --tag itnun-back:latest ."
 
       }
 		}
