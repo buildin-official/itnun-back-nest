@@ -43,7 +43,7 @@ pipeline {
 						string(credentialsId: 'buildin-server-port', variable: 'PORT'),
 						sshUserPrivateKey(credentialsId: 'buildin-server', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName'),
 					]) {
-						sshagent(['buildin-server']) {
+						sshagent (credentials: ['buildin-server']) {
                 sh '''
 								ssh -o StrictHostKeyChecking=no -p $PORT $userName@$HOST '
 								cd ~/docker-compose/itnun-back-nest
