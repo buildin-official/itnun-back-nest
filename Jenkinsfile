@@ -42,7 +42,7 @@ pipeline {
 						string(credentialsId: 'buildin-server-host', variable: 'HOST'),
 						string(credentialsId: 'buildin-server-port', variable: 'PORT'),
 						string(credentialsId: 'itnun-back-doppler-token', variable: 'DOPPLER_TOKEN'),
-						// sshUserPrivateKey(credentialsId: 'buildin-server', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName'),
+						sshUserPrivateKey(credentialsId: 'buildin-server', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName'),
 					]) {
 						def commandString = '''
 								cd ~/docker-compose/itnun-back-nest
