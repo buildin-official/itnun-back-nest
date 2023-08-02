@@ -13,24 +13,16 @@ pipeline {
 				checkout scm
 			}
 		}
-		stage("Build") {
-      steps {
-        sh "docker buildx build --platform linux/amd64 --tag itnun-back:latest ."
-
-      }
-		}
-	  stage("Tag and Push") {
+		stage("Build and Push") {
 			steps {
-        withCredentials([[$class: 'UsernamePasswordMultiBinding',
-								          credentialsId: 'docker-hub',
-								          usernameVariable: 'DOCKER_USER_ID',
-								          passwordVariable: 'DOCKER_USER_PASSWORD'
+				withCredentials([[$class: 'UsernamePasswordMultiBinding',
+								credentialsId: 'docker-hub',
+								usernameVariable: 'DOCKER_USER_ID',
+								passwordVariable: 'DOCKER_USER_PASSWORD'
 				]]){
 					sh 'docker login -u $DOCKER_USER_ID -p $DOCKER_USER_PASSWORD'
-					sh 'docker tag itnun-back:latest $DOCKER_USER_ID/itnun-back:$BUILD_NUMBER'
-					sh 'docker push $DOCKER_USER_ID/itnun-back:$BUILD_NUMBER'
-					sh 'docker tag $DOCKER_USER_ID/itnun-back:$BUILD_NUMBER $DOCKER_USER_ID/itnun-back:latest'
-					sh 'docker push $DOCKER_USER_ID/itnun-back:latest'
+					sh 'docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 --tag $DOCKER_USER_ID/itnun-back:$BUILD_NUMBER --push .'
+					sh 'docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 --tag $DOCKER_USER_ID/itnun-back:latest --push .'
 				}	
 			}
 		}
